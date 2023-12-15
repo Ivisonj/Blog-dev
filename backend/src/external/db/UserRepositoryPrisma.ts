@@ -31,4 +31,14 @@ export default class UserRepositoryPrisma implements UserRepository {
         if(!user) return null
         return user
     }
+
+    async getAllUsers(): Promise<User[]> {
+        const users = await this.prisma.users.findMany()
+        return users.map((user) => ({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password
+        }))
+    }
 }

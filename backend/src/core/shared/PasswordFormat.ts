@@ -6,6 +6,6 @@ export default class PasswordFormat {
     ) {
         if(!password) throw new Error('A senha é obrigatória')
         if(password.length < min) throw new Error(`A senha deve ter no mínimo ${min} caracteres`)
-        if(password.length < max) throw new Error(`A senha deve ter no máximo ${max} caracteres`)
+        if(password.length > max) throw new Error(`A senha deve ter no máximo ${max} caracteres`)
     }
 }
