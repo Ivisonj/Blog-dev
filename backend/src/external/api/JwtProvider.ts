@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-export default class ProviderJwt {
+export default class JwtProvider {
     constructor(private secret: string) {}
 
     generate(data: string | object): string {

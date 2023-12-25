@@ -8,6 +8,8 @@ import RegisterUser from './core/user/service/RegisterUser'
 import RegisterUserController from './external/api/RegisterUserController'
 import GetUsers from './core/user/service/GetUsers'
 import GetUsersController from './external/api/GetUsersController'
+import UserLogin from './core/user/service/UserLogin'
+import UserLoginController from './external/api/UserLoginController'
 
 const app = express()
 const port = process.env.API_PORT ?? 4000
@@ -23,6 +25,12 @@ app.listen(port, () => {
 const userRepository = new UserRepositoryPrisma()
 const cryptoProvider = new PasswordCryto()
 
+//---Login
+const userLogin = new UserLogin(userRepository, cryptoProvider)
+
+new UserLoginController(app, userLogin)
+
+//---Register User
 const registerUser = new RegisterUser(userRepository, cryptoProvider)
 
 new RegisterUserController(app, registerUser)
