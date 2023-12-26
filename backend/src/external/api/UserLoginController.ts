@@ -4,8 +4,8 @@ import JwtProvider from "./JwtProvider"
 
 export default class UserLoginController {
     constructor(
-        server: Express,
-        useCase: UserLogin
+        readonly server: Express,
+        readonly useCase: UserLogin
     ) {
         server.post('/api/user/login', async (req, res) => {
             try {

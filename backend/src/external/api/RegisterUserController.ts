@@ -3,8 +3,8 @@ import { Express } from "express"
 
 export default class RegisterUserController {
     constructor(
-        server: Express, 
-        useCase: RegisterUser
+        readonly server: Express, 
+        readonly useCase: RegisterUser
     ) {
         server.post('/api/user/register', async (req, res) => {
             try {
