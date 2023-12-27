@@ -18,7 +18,7 @@ export default class RegisterUser implements UseCase<User, void> {
         if(userExists) throw new Error(Erros.USER_ALREADY_EXISTS)
 
         const newUser: User = {
-            id: Id.generateHash(),
+            // id: Id.generateHash(),
             name: user.name, 
             email: user.email, 
             password: encripPassword

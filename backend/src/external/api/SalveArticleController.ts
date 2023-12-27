@@ -9,11 +9,12 @@ export default class SalveArticleController {
     ) {
         server.post('/api/article/salve', async (req, res) => {
             try {
-                await useCase.execute(
-                    new Article({
-                        ...req.body,
-                    })
-                )
+                await useCase.execute({
+                    title: req.body.title, 
+                    subtitle: req.body.subtitle,
+                    userId: req.body.userId, 
+                    content: req.body.content  
+                })
                 res.status(200).send()
             } catch(erro: any) {
                 res.status(400).send(erro.message)

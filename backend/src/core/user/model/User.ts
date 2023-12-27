@@ -1,10 +1,10 @@
 import EmailFormat from "@/core/shared/EmailFormat"
+import Entity from "@/core/shared/Entity"
 // import Entity from "@/core/shared/Entity"
 import Id from "@/core/shared/Id"
-import NameFormat from "@/core/shared/NameFormat"
 import PasswordFormat from "@/core/shared/PasswordFormat"
 
-export  default interface User {
+export default interface User {
     id?: string
     name: string
     email: string
@@ -23,3 +23,4 @@ export  default interface User {
 //         this.password = new PasswordFormat(props.password!, 3, 20)
 //     }
 // }
+

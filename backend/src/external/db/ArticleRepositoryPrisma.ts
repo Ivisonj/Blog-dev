@@ -10,17 +10,40 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
     }
     
     async salve(article: Article): Promise<void> {
-        const articleDB = { ...article.props, createdAt: new Date() }
+        const newArticle = { 
+            id: article.id,
+            title: article.title, 
+            subtitle: article.subtitle,  
+            createdAt: new Date(), 
+            userId: article.userId, 
+            content: article.content
+        }
         
         await this.prisma.articles.upsert({
-            where: { id: article.id.value }, 
-            create: articleDB, 
-            update: articleDB,
+            where: { id: article.id }, 
+            create: newArticle, 
+            update: newArticle,
         })
     }
 
     async getAll(): Promise<Article[]> {
         const articles = await this.prisma.articles.findMany()
-        return articles.map((a: any) => new Article(a))
+        return articles.map((article) => ({
+            id: article.id,
+            title: article.title, 
+            subtitle: article.subtitle,
+            createdAt: article.createdAt, 
+            userId: article.userId, 
+            content: article.content 
+        }))
     }
 }
+
+// const articleDB = {
+//     id: article.id.value, 
+//     title: article.title.complete, 
+//     subtitle: article.subtitle.complete, 
+//     createdAt: new Date(), 
+//     userId: article.userId, 
+//     content: article.content.complete
+// }

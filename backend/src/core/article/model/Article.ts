@@ -1,6 +1,6 @@
 import Entity from "@/core/shared/Entity"
 
-interface ArticleProps {
+export default interface Article {
     id?: string
     title: string
     subtitle: string
@@ -8,11 +8,11 @@ interface ArticleProps {
     content: string
 }
 
-export default class Article extends Entity {
-    readonly props: ArticleProps
+// export default class Article extends Entity {
+//     readonly props: ArticleProps
 
-    constructor(props: ArticleProps) {
-        super(props.id!)
-        this.props = props    
-    } 
-} 
+//     constructor(props: ArticleProps) {
+//         super(props.id!)
+//         this.props = props    
+//     } 
+// } 
