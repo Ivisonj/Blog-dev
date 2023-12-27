@@ -38,12 +38,3 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         }))
     }
 }
-
-// const articleDB = {
-//     id: article.id.value, 
-//     title: article.title.complete, 
-//     subtitle: article.subtitle.complete, 
-//     createdAt: new Date(), 
-//     userId: article.userId, 
-//     content: article.content.complete
-// }

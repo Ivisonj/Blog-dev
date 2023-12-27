@@ -5,9 +5,3 @@ export default class Id {
         return uuid()
     }
 }
-
-// export default class Id {
-//     constructor(readonly value: string = uuid()) {
-//         if(!validate(value)) throw new Error('Id inválido')
-//     }
-// }

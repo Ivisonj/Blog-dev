@@ -4,6 +4,9 @@ import UserRepository from "./UserRepository"
 import CryptoProvider from "./CryptoProvider"
 import Erros from "@/core/shared/Erros"
 import Id from "@/core/shared/Id"
+import NameFormat from "@/core/shared/NameFormat "
+import EmailFormat from "@/core/shared/EmailFormat"
+import PasswordFormat from "@/core/shared/PasswordFormat"
 
 export default class RegisterUser implements UseCase<User, void> {
     constructor(
@@ -12,15 +15,17 @@ export default class RegisterUser implements UseCase<User, void> {
     ) {}
 
     async execute(user: User): Promise<void> {
+        PasswordFormat.validatePassword(user.password, 3, 10)
+
         const encripPassword = this.cryptoProvider.encrypt(user.password)
 
         const userExists = await this.userRepository.searchByEmail(user.email)
         if(userExists) throw new Error(Erros.USER_ALREADY_EXISTS)
 
         const newUser: User = {
-            // id: Id.generateHash(),
-            name: user.name, 
-            email: user.email, 
+            id: Id.generateHash(),
+            name: NameFormat.validateName(user.name, 3, 30), 
+            email: EmailFormat.validateEmail(user.email), 
             password: encripPassword
         }
 
