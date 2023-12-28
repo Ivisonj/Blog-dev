@@ -5,9 +5,9 @@ export default class GetUsersController {
     constructor(
         readonly server: Express, 
         readonly useCase: GetUsers,
-        // ...middlewares: any[] 
+        ...middlewares: any[] 
     ) {
-        server.get('/api/users/', /*...middlewares,*/ async (req, res) => {
+        server.get('/api/users/', ...middlewares, async (req, res) => {
             try {
                const users = await useCase.execute()
                res.status(200).json(users)

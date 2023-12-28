@@ -5,9 +5,10 @@ import { Express } from "express"
 export default class SalveArticleController {
     constructor(
        readonly server: Express, 
-       readonly useCase: SaveArticle
+       readonly useCase: SaveArticle, 
+       ...middlewares: any[] 
     ) {
-        server.post('/api/article/salve', async (req, res) => {
+        server.post('/api/article/salve', ...middlewares, async (req, res) => {
             try {
                 await useCase.execute({
                     title: req.body.title, 

@@ -46,16 +46,16 @@ new UserLoginController(app, userLogin)
 const userMid = UserMiddleware(userRepository)
 
 const getUsers = new GetUsers(userRepository)
-new GetUsersController(app, getUsers, /*userMid*/)
+new GetUsersController(app, getUsers, userMid)
 
 //---salve article
 const articleRepository = new ArticleRepositoryPrisma()
 
 const saveArticle = new SaveArticle(articleRepository)
 
-new SalveArticleController(app, saveArticle)
+new SalveArticleController(app, saveArticle, userMid)
 
 //---Get all Articles
 const getArticles = new GetArticles(articleRepository)
 
-new GetArticlesController(app, getArticles)
+new GetArticlesController(app, getArticles, userMid)

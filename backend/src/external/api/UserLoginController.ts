@@ -14,8 +14,10 @@ export default class UserLoginController {
                     password: req.body.password
                 })
 
-                const jwtProvider = new JwtProvider(process.env.JWT_SECRET)
-                res.status(200).send(jwtProvider.generate(user))
+                const jwtProvider = new JwtProvider(process.env.JWT_SECRET!)
+                res.status(200).send({
+                    token: jwtProvider.generate(user)
+                })
             } catch(erro: any) {
                 res.status(400).send(erro.message)
             }
