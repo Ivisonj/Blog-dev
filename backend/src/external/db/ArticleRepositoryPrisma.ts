@@ -1,5 +1,6 @@
 import Article from "@/core/article/model/Article"
 import ArticleRepository from "@/core/article/service/ArticleRepository"
+import Erros from "@/core/shared/Erros"
 import { PrismaClient } from "@prisma/client"
 
 export default class ArticleRepositoryPrisma implements ArticleRepository {
@@ -36,5 +37,20 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
             userId: article.userId, 
             content: article.content 
         }))
+    }
+
+    async getArticleById(id: string): Promise<Article[] | null> {
+        const article = await this.prisma.articles.findUnique({
+            where: { id: id }
+        })
+        if(!article) throw new Error('Artigo não existe')
+        return {
+            id: article.id,
+            title: article.title, 
+            subtitle: article.subtitle,
+            createdAt: article.createdAt, 
+            userId: article.userId, 
+            content: article.content 
+        }
     }
 }

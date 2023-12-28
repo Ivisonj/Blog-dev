@@ -19,7 +19,9 @@ import GetArticlesController from './external/api/GetArticlesController'
 import GetUserById from './core/user/service/GetUserById'
 import GetUserByIdController from './external/api/GetUserByIdController'
 import DeleUser from './core/user/service/DeleteUser'
-import DeleteUserController from './external/api/DeleteUser'
+import DeleteUserController from './external/api/DeleteUserController'
+import GetArticleById from './core/article/service/GetArticleById'
+import GetArticleByIdController from './external/api/GetArticleByIdController'
 
 const app = express()
 const port = process.env.API_PORT ?? 4000
@@ -71,3 +73,7 @@ new SalveArticleController(app, saveArticle, userMid)
 const getArticles = new GetArticles(articleRepository)
 
 new GetArticlesController(app, getArticles, userMid)
+
+//--- get article by Id
+const getArticleById = new GetArticleById(articleRepository)
+new GetArticleByIdController(app, getArticleById, userMid)
