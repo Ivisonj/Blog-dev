@@ -16,6 +16,8 @@ import SaveArticle from './core/article/service/SaveArticle'
 import SalveArticleController from './external/api/SalveArticleController'
 import GetArticles from './core/article/service/GetArticles'
 import GetArticlesController from './external/api/GetArticlesController'
+import GetUserById from './core/user/service/GetUserById'
+import GetUserByIdController from './external/api/GetUserByIdController'
 
 const app = express()
 const port = process.env.API_PORT ?? 4000
@@ -47,6 +49,10 @@ const userMid = UserMiddleware(userRepository)
 
 const getUsers = new GetUsers(userRepository)
 new GetUsersController(app, getUsers, userMid)
+
+//---Get User By ID
+const getUserById = new GetUserById(userRepository)
+new GetUserByIdController(app, getUserById, userMid)
 
 //---salve article
 const articleRepository = new ArticleRepositoryPrisma()

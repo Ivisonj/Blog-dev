@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 import User from "@/core/user/model/User"
 import UserRepository from "@/core/user/service/UserRepository"
+import Erros from "@/core/shared/Erros"
 
 export default class UserRepositoryPrisma implements UserRepository {
     private prisma: PrismaClient
@@ -39,5 +40,17 @@ export default class UserRepositoryPrisma implements UserRepository {
             name: user.name,
             email: user.email,
         }))
+    }
+
+    async getUserById(id: string): Promise<User[] | null> {
+        const user = await this.prisma.users.findUnique({
+            where: { id: id }
+        })
+        if(!user) throw new Error(Erros.USER_NOT_EXISTS)
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        }  
     }
 }
