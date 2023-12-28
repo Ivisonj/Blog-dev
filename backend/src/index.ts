@@ -18,6 +18,8 @@ import GetArticles from './core/article/service/GetArticles'
 import GetArticlesController from './external/api/GetArticlesController'
 import GetUserById from './core/user/service/GetUserById'
 import GetUserByIdController from './external/api/GetUserByIdController'
+import DeleUser from './core/user/service/DeleteUser'
+import DeleteUserController from './external/api/DeleteUser'
 
 const app = express()
 const port = process.env.API_PORT ?? 4000
@@ -53,6 +55,10 @@ new GetUsersController(app, getUsers, userMid)
 //---Get User By ID
 const getUserById = new GetUserById(userRepository)
 new GetUserByIdController(app, getUserById, userMid)
+
+//---Delete user
+const deleteUser = new DeleUser(userRepository)
+new DeleteUserController(app, deleteUser, userMid)
 
 //---salve article
 const articleRepository = new ArticleRepositoryPrisma()

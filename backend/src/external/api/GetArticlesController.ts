@@ -3,8 +3,8 @@ import { Express } from "express"
 
 export default class GetArticlesController {
     constructor(
-        server: Express, 
-        useCase: GetArticles, 
+        readonly server: Express, 
+        readonly useCase: GetArticles, 
         ...middlewares: any[] 
     ) {
         server.get('/api/articles', ...middlewares, async (req, res) => {
