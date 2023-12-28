@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
-
 import express from 'express'
+
 import UserRepositoryPrisma from './external/db/UserRepositoryPrisma'
 import PasswordCryto from './external/auth/PasswordCryto'
 import RegisterUser from './core/user/service/RegisterUser'
@@ -22,6 +22,8 @@ import DeleUser from './core/user/service/DeleteUser'
 import DeleteUserController from './external/api/DeleteUserController'
 import GetArticleById from './core/article/service/GetArticleById'
 import GetArticleByIdController from './external/api/GetArticleByIdController'
+import DeleteArticle from './core/article/service/DeleteArticle'
+import DeleteArticleController from './external/api/DeleteArticleController'
 
 const app = express()
 const port = process.env.API_PORT ?? 4000
@@ -77,3 +79,7 @@ new GetArticlesController(app, getArticles, userMid)
 //--- get article by Id
 const getArticleById = new GetArticleById(articleRepository)
 new GetArticleByIdController(app, getArticleById, userMid)
+
+//---delete article
+const deleteArticle = new DeleteArticle(articleRepository)
+new DeleteArticleController(app, deleteArticle, userMid)

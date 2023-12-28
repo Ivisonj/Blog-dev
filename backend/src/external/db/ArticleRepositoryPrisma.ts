@@ -53,4 +53,10 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
             content: article.content 
         }
     }
+
+    async deleteArticle(id: string): Promise<void> {
+        const article = await this.prisma.articles.delete({
+            where: { id: id }
+        })    
+    }
 }
