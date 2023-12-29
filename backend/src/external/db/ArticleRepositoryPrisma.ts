@@ -14,7 +14,9 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         const newArticle = { 
             id: article.id,
             title: article.title, 
-            subtitle: article.subtitle,  
+            description: article.description,
+            imageUrl: article.imageUrl,
+            category: article.category,  
             createdAt: new Date(), 
             userId: article.userId, 
             content: article.content
@@ -32,10 +34,12 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         return articles.map((article) => ({
             id: article.id,
             title: article.title, 
-            subtitle: article.subtitle,
+            description: article.description,
+            imageUrl: article.imageUrl,
+            category: article.category,  
             createdAt: article.createdAt, 
             userId: article.userId, 
-            content: article.content 
+            content: article.content
         }))
     }
 
@@ -47,7 +51,9 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         return {
             id: article.id,
             title: article.title, 
-            subtitle: article.subtitle,
+            description: article.description,
+            imageUrl: article.imageUrl,
+            category: article.category,  
             createdAt: article.createdAt, 
             userId: article.userId, 
             content: article.content 

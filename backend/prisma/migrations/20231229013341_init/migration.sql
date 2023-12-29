@@ -12,9 +12,11 @@ CREATE TABLE "Users" (
 CREATE TABLE "Articles" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "subtitle" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "imageUrl" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "content" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "Articles_pkey" PRIMARY KEY ("id")

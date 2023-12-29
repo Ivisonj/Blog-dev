@@ -21,11 +21,11 @@ model Users {
 model Articles {
   id        String   @id @default(uuid())
   title     String
-  subtitle  String
+  description  String
+  imageUrl String
   createdAt DateTime @default(now())
   content   String
+  category String
   userId    String
   user      Users    @relation(fields: [userId], references: [id])
 }
-
-

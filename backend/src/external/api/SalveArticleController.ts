@@ -12,7 +12,9 @@ export default class SalveArticleController {
             try {
                 await useCase.execute({
                     title: req.body.title, 
-                    subtitle: req.body.subtitle,
+                    description: req.body.description,
+                    imageUrl: req.body.imageUrl,
+                    category: req.body.category,
                     userId: req.body.userId, 
                     content: req.body.content  
                 })
