@@ -1,5 +1,16 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, defineProps } from 'vue'
+
+    const props = defineProps({
+        inputType: {
+            type: String,
+            default: 'text'
+        }, 
+        inputLabel: {
+            label: String,
+            default: 'E-mail' 
+        }
+    })
 
     const inputValid = ref('')
     const isFocused = ref(false)
@@ -13,7 +24,7 @@
     <div class="inputContainer">
         <input 
             class="input" 
-            type="text" 
+            :type="inputType" 
             v-model="inputValid" 
             @focus="isFocused = true" 
             @blur="isFocused = false"
@@ -24,7 +35,7 @@
             :style="{top: updateLabelPosition()}" 
             htmlFor="inputField"
         >
-            E-mail
+            {{ inputLabel }}
         </label>        
     </div>
 </template>
@@ -32,15 +43,16 @@
     .inputContainer {
         position: relative;
         width: 100%;
-        height: 48px;
+        height: 52px;
         display: flex;
         align-items: flex-end;
         justify-content: center;
+        margin: 20px 0px;
     }
     
     .input {
         width: 75%;
-        height: 35px;
+        height: 41px;
         font-size: 16px;
         color: #000;
     }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import FormInputsVue from "./FormInputs.vue";
+  import FormInputsVue from "./FormInputs.vue"
+  import FormButtonVue from "./FormButton.vue"
 </script>
 
 <template>
@@ -9,7 +10,9 @@
         <div class="internalContainer">
           <h1 class="loginTitle">Login</h1>
           <form class="loginForm">
-            <FormInputsVue />
+            <FormInputsVue :inputType="'text'" :inputLabel="'E-mail'"/>
+            <FormInputsVue :inputType="'password'" :inputLabel="'Senha'"/>
+            <FormButtonVue />
           </form>
         </div>
     </div>
