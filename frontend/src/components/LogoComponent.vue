@@ -1,0 +1,21 @@
+<script setup lang="ts">
+</script>
+
+<template> 
+    <h1 class="logoTitle">
+        Blog<span class="logoTitle2">.Dev</span>
+    </h1>
+</template>
+<style scoped>
+    .logoTitle {
+        font-size: 2rem;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .logoTitle2 {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #9c81b6;
+    }
+</style>
