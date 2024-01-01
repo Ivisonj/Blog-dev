@@ -19,17 +19,18 @@
     .categoryHeaderContainer {
         position: sticky;
         top: 0;
-        width: 95%;
+        width: 100%;
         height: 64px;
-        margin-left: 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: #fff;
     }
 
     .categoryHeaderContainer .titleContainer {
         width: auto;
         height: 100%;
+        margin-left: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
