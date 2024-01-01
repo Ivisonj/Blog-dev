@@ -1,26 +1,34 @@
 <script setup lang="ts">
+    import { ref, defineProps } from 'vue'
+
+    const props = defineProps({
+        imageUrl: String, 
+        title: String,
+        description: String, 
+        createdAt: String,
+        category: String
+    })
 </script>
 
 <template> 
     <div class="articleContainer">
         <img 
             class="articleImage"
-            src="https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg" 
+            :src="imageUrl" 
             alt="img"
         >
         <div class="articleInfor">
             <div class="titleContainer">
-                <h1 class="articleTitle">Estudo sobre callbacks em JavaScript</h1>
+                <h1 class="articleTitle">{{ title }}</h1>
             </div>
             <div class="descriptionContainer">
                 <p class="articleDescription">
-                    Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos
-                    sobre esse assunto tão importante.
+                    {{ description }}
                 </p>
             </div>
             <div class="createdAtContainer">
                 <h3 class="createdAt">
-                    30 de Novembro, 2023
+                    {{ createdAt }}
                 </h3>
             </div>
         </div>
@@ -28,9 +36,10 @@
 </template>
 <style scoped>
     .articleContainer {
-        width: 470px;
-        height: 400px;
+        width: 400px;
+        height: 330px;
         display: flex;
+        margin: 5px;
         flex-direction: column;
         background-color: #eae8eb;
         cursor: pointer;   
@@ -43,28 +52,29 @@
 
     .articleImage {
         width: 100%;
-        height: 200px;
+        height: 50%;
     }
 
     .articleContainer .articleInfor {
         width: 100%;
-        height: 200px;
+        height: 50%;
         padding: 10px 25px;
     }
     
     .articleInfor .titleContainer {
         width: 100%;
-        height: 30%;
+        height: auto;
     }
 
     .titleContainer .articleTitle {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: 400;
     }
 
     .articleInfor .descriptionContainer {
         width: 100%;
         height: 50%;
+        margin-top: 10px;
     }
 
     .descriptionContainer .articleDescription {

@@ -1,7 +1,52 @@
 <script setup lang="ts">
-    import ArticleComponentVue from '../components/ArticleComponent.vue'
+    import CardComponentVue from '../components/CardComponent.vue'
+    import FooterComponentVue from '../components/FooterComponent.vue'
     import HeaderCategoryVue from '../components/HeaderCategory.vue'
     import HeaderComponentVue from '../components/HeaderComponent.vue'
+
+    interface CardDataTypes {
+        id: string
+        title: string
+        description: string
+        createdAt: string
+        imageUrl: string
+        category?: string
+    }
+
+    const cardData: CardDataTypes[] = [
+        {
+            id: '1', 
+            title: 'Estudo sobre callbacks em JavaScript',
+            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
+            createdAt: '  30 de Novembro, 2023', 
+            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
+            category: 'web'
+        },
+        {
+            id: '2', 
+            title: 'Estudo sobre callbacks em JavaScript',
+            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
+            createdAt: '  30 de Novembro, 2023', 
+            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
+            category: 'mobile'
+        },
+        {
+            id: '3', 
+            title: 'Estudo sobre callbacks em JavaScript',
+            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
+            createdAt: '  30 de Novembro, 2023', 
+            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
+            category: 'desktop'
+        },
+        {
+            id: '4', 
+            title: 'Estudo sobre callbacks em JavaScript',
+            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
+            createdAt: '  30 de Novembro, 2023', 
+            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
+            category: 'ai'
+        }
+    ]
 </script>
 
 <template>
@@ -17,15 +62,23 @@
             </h3>
         </div>
         <div class="articlesContainer">
-            <ArticleComponentVue />
+            <CardComponentVue 
+                v-for="card in cardData" 
+                :key="card.id" 
+                :title="card.title"
+                :description="card.description"
+                :createdAt="card.createdAt"
+                :imageUrl="card.imageUrl"
+            />
         </div>
+        <FooterComponentVue />
     </div>
 </template>
 
 <style scoped>
     .homeContainer {
         width: 100vw;
-        height: 3000px;
+        height: 100vh;
     }
 
     .categoryTitle {
@@ -50,5 +103,7 @@
         width: 100%;
         height: auto;
         padding: 24px;
+        display: flex;
+        flex-wrap: wrap;
     }
 </style>
