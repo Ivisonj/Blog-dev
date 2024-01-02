@@ -1,8 +1,15 @@
 <script setup lang="ts">
+    import { useRouter } from 'vue-router'
+
+    const router = useRouter()
+
+    const navToLogin = () => {
+        router.push('/login')
+    }
 </script>
 
 <template> 
-    <button class="loginButton">
+    <button class="loginButton" @click="navToLogin">
         Login
     </button>
 </template>
