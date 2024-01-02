@@ -1,8 +1,10 @@
 <script setup lang="ts">
-    import CardComponentVue from '../components/CardComponent.vue'
+    import { computed } from 'vue'
+import CardComponentVue from '../components/CardComponent.vue'
     import FooterComponentVue from '../components/FooterComponent.vue'
     import HeaderCategoryVue from '../components/HeaderCategory.vue'
     import HeaderComponentVue from '../components/HeaderComponent.vue'
+    import { useSelectCategory } from '../stores/selectCategory'
 
     interface CardDataTypes {
         id: string
@@ -16,7 +18,7 @@
     const cardData: CardDataTypes[] = [
         {
             id: '1', 
-            title: 'Estudo sobre callbacks em JavaScript',
+            title: 'Este tem a categoria Web',
             description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
             createdAt: '  30 de Novembro, 2023', 
             imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
@@ -24,7 +26,7 @@
         },
         {
             id: '2', 
-            title: 'Estudo sobre callbacks em JavaScript',
+            title: 'Este tem a categoria Mobile',
             description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
             createdAt: '  30 de Novembro, 2023', 
             imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
@@ -32,7 +34,7 @@
         },
         {
             id: '3', 
-            title: 'Estudo sobre callbacks em JavaScript',
+            title: 'Este tem a categoria Desktop',
             description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
             createdAt: '  30 de Novembro, 2023', 
             imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
@@ -40,13 +42,19 @@
         },
         {
             id: '4', 
-            title: 'Estudo sobre callbacks em JavaScript',
+            title: 'Este tem a categoria Ai',
             description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
             createdAt: '  30 de Novembro, 2023', 
             imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
             category: 'ai'
         }
     ]
+
+    const selectCategory = useSelectCategory()
+
+    const filterByCategory = computed(() => {
+        return cardData.filter(item => item.category === selectCategory.selectedCategory)
+    })
 </script>
 
 <template>
@@ -63,7 +71,7 @@
         </div>
         <div class="articlesContainer">
             <CardComponentVue 
-                v-for="card in cardData" 
+                v-for="card in filterByCategory" 
                 :key="card.id" 
                 :title="card.title"
                 :description="card.description"

@@ -1,5 +1,24 @@
 <script setup lang="ts">
     import CategoryButtonVue from './CategoryButton.vue'
+    import { useSelectCategory } from '../stores/selectCategory'
+
+    const selectCategory = useSelectCategory()
+
+    const handleWebClick = () => {
+        selectCategory.setSelectedCategory('web')
+    }
+
+    const handleMobileClick = () => {
+        selectCategory.setSelectedCategory('mobile')
+    }
+
+    const handledesktopClick = () => {
+        selectCategory.setSelectedCategory('desktop')
+    }
+
+    const handleAiClick = () => {
+        selectCategory.setSelectedCategory('ai')
+    }
 </script>
 
 <template> 
@@ -8,10 +27,10 @@
             <h1 class="title">Categorias</h1>
         </div>
         <div class="categoryButtonContainer">
-            <CategoryButtonVue :buttonChildren="'Web'"/>
-            <CategoryButtonVue :buttonChildren="'Mobile'"/>
-            <CategoryButtonVue :buttonChildren="'Desktop'"/>
-            <CategoryButtonVue :buttonChildren="'AI'"/>
+            <CategoryButtonVue :buttonChildren="'Web'" :click="handleWebClick"/>
+            <CategoryButtonVue :buttonChildren="'Mobile'" :click="handleMobileClick"/>
+            <CategoryButtonVue :buttonChildren="'Desktop'" :click="handledesktopClick"/>
+            <CategoryButtonVue :buttonChildren="'AI'" :click="handleAiClick"/>
         </div>
     </div>
 </template>

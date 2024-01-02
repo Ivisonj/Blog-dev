@@ -1,17 +1,18 @@
 <script setup lang="ts">
-     import { ref, defineProps } from 'vue'
+     import { defineProps, Fragment } from 'vue'
 
      const props = defineProps({
         buttonChildren: String, 
         buttonType: {
             type: String,
             default:'button'
-        },        
+        },
+        click: Function        
      })
 </script>
 
 <template> 
-    <button class="categoryButton" :type="buttonType">
+    <button class="categoryButton" :type="buttonType" @click="click">
         {{ buttonChildren }}
     </button>
 </template>
