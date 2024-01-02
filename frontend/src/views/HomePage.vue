@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { computed } from 'vue'
+    import { capitalize, computed } from 'vue'
 import CardComponentVue from '../components/CardComponent.vue'
     import FooterComponentVue from '../components/FooterComponent.vue'
     import HeaderCategoryVue from '../components/HeaderCategory.vue'
@@ -55,6 +55,10 @@ import CardComponentVue from '../components/CardComponent.vue'
     const filterByCategory = computed(() => {
         return cardData.filter(item => item.category === selectCategory.selectedCategory)
     })
+
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 </script>
 
 <template>
@@ -63,10 +67,10 @@ import CardComponentVue from '../components/CardComponent.vue'
         <HeaderCategoryVue />
         <div class="categoryTitle">
             <h1 class="title">
-                Web
+                {{ capitalizeFirstLetter(selectCategory.selectedCategory) }}
             </h1>
             <h3 class="subtitle">
-                Artigos sobre desenvolvimento Web
+                {{ `Artigos sobre desenvolvimento ${capitalizeFirstLetter(selectCategory.selectedCategory)}` }}
             </h3>
         </div>
         <div class="articlesContainer">
