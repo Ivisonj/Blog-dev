@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { capitalize, computed } from 'vue'
-import CardComponentVue from '../components/CardComponent.vue'
+    import CardComponentVue from '../components/CardComponent.vue'
     import FooterComponentVue from '../components/FooterComponent.vue'
     import HeaderCategoryVue from '../components/HeaderCategory.vue'
     import HeaderComponentVue from '../components/HeaderComponent.vue'
