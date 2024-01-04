@@ -1,17 +1,29 @@
-<script setup lang="ts">
-  import FormInputsVue from "./FormInputs.vue"
+<script lang="ts">
   import FormButtonVue from "./FormButton.vue"
   import { useSelectForm } from '../stores/selectForm'
+import { defineComponent } from "vue"
 
-  const selectForm = useSelectForm()
+  export default defineComponent({
+    name: 'LoginForm', 
+    components: { FormButtonVue }, 
+    setup() {
+      const selectForm = useSelectForm()
 
-  const handleSignupClick = () => {
-    selectForm.setCurrentForm('1')
-  }
+      const handleSignupClick = () => {
+        selectForm.setCurrentForm('1')
+      }
 
-  const handleLoginClick = () => {
-    selectForm.setCurrentForm('2')
-  }
+      const handleLoginClick = () => {
+        selectForm.setCurrentForm('2')
+      }
+
+      return {
+        handleSignupClick, 
+        handleLoginClick, 
+        selectForm
+      }
+    }
+  })
 </script>
 
 <template>
@@ -21,18 +33,28 @@
           class="signupTitle"
           :style="{'font-size': selectForm.currentForm === '1' ? '1.5rem' : '0.9rem'}"
         >
-          Sign Up
+          Cadastrar
         </h1>
         <form class="loginForm">
-          <FormInputsVue :inputType="'text'" :inputLabel="'E-mail'"/>
-          <FormInputsVue :inputType="'password'" :inputLabel="'Senha'"/>
-          <FormButtonVue :buttonChildren="'Login'" :buttonType="submit"/>
+          <div class="w-75 mb-2 mt-3">
+            <label for="InputName" class="form-label text-white">Nome</label>
+            <input type="text" class="form-control" id="InputName" aria-describedby="emailHelp">
+          </div>
+          <div class="w-75 mb-2">
+            <label for="InputEmail" class="form-label text-white">E-mail</label>
+            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+          </div>
+          <div class="w-75 mb-4">
+            <label for="InputPassword" class="form-label text-white">Senha</label>
+            <input type="password" class="form-control" id="InputPassword">
+          </div>
+          <FormButtonVue :buttonChildren="'Cadastrar'" :buttonType="submit"/>
         </form>
       </div>
       <div 
         class="loginContainer" 
         @click="handleLoginClick"
-        :style="{top: selectForm.currentForm === '1' ? '385px' : '70px'}"
+        :style="{top: selectForm.currentForm === '1' ? '400px' : '68px'}"
       >
         <h1 
           class="loginTitle"
@@ -41,9 +63,15 @@
           Login
         </h1>
         <form class="loginForm">
-          <FormInputsVue :inputType="'text'" :inputLabel="'E-mail'"/>
-          <FormInputsVue :inputType="'password'" :inputLabel="'Senha'"/>
-          <FormButtonVue :buttonChildren="'Login'" :buttonType="submit"/>
+          <div class="w-75 mb-3 mt-3">
+            <label for="InputEmail" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+          </div>
+          <div class="w-75 mb-4">
+            <label for="InputPassword" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="InputPassword">
+          </div>
+          <FormButtonVue :buttonChildren="'ENTRAR'" :buttonType="submit"/>
         </form>
       </div>
     </div>
@@ -97,11 +125,26 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #2c2a5c;
-     transition: 0.5s;
+    transition: 0.5s;
   }
 
   .loginForm {
     width: 350px;
     height: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   } 
+
+  #InputEmail:focus {
+    border-color: purple !important;
+  }
+
+  #InputPassword:focus {
+    border-color: purple !important;
+  }
+
+  #InputName:focus {
+    border-color: purple !important;
+  }
 </style>

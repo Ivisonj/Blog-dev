@@ -1,13 +1,16 @@
-<script setup lang="ts">
-    import { ref, defineProps } from 'vue'
+<script lang="ts">
+    import { defineComponent } from 'vue'
 
-    const props = defineProps({
-        buttonChildren: String,
-        buttonType: {
-            type: String,
-            default:'button'
-        },
-        // handleClick: Function
+    export default defineComponent({
+        name: 'FormButton', 
+        props: {
+                buttonChildren: String,
+                buttonType: {
+                type: String,
+                default:'button'
+            }   ,
+            // handleClick: Function
+        }
     })
 </script>
 
