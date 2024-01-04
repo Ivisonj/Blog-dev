@@ -21,6 +21,7 @@ export default defineComponent({
     .footerContainer {
         grid-area: footer;
         padding: 56px 50px;
+        margin-top: 40px;
         background-color: #141434;
     }
 
