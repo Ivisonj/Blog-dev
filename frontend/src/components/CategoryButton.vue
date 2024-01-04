@@ -1,14 +1,17 @@
-<script setup lang="ts">
-     import { defineProps, Fragment } from 'vue'
+<script lang="ts">
+     import { defineComponent } from 'vue'
 
-     const props = defineProps({
-        buttonChildren: String, 
-        buttonType: {
-            type: String,
-            default:'button'
-        },
-        click: Function        
-     })
+    export default defineComponent({
+        name: 'CategoryButton',
+        props: {
+            buttonChildren: String, 
+            buttonType: {
+                type: String,
+                default:'button'
+            },
+            click: Function        
+        }
+    })
 </script>
 
 <template> 

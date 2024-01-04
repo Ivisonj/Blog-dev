@@ -1,28 +1,43 @@
-<script setup lang="ts">
-    import CategoryButtonVue from './CategoryButton.vue'
-    import { useSelectCategory } from '../stores/selectCategory'
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { useSelectCategory } from '../../stores/selectCategory'
+    import CategoryButtonVue from '../CategoryButton.vue'
 
-    const selectCategory = useSelectCategory()
+    export default defineComponent({
+        name: 'HeaderCategoryTemplate', 
+        components: { CategoryButtonVue },
+        setup() {
+            const selectCategory = useSelectCategory()
 
-    const handleWebClick = () => {
-        selectCategory.setSelectedCategory('web')
-    }
+            const handleWebClick = () => {
+                selectCategory.setSelectedCategory('web')
+            }
 
-    const handleMobileClick = () => {
-        selectCategory.setSelectedCategory('mobile')
-    }
+            const handleMobileClick = () => {
+                selectCategory.setSelectedCategory('mobile')
+            }
 
-    const handledesktopClick = () => {
-        selectCategory.setSelectedCategory('desktop')
-    }
+            const handledesktopClick = () => {
+                selectCategory.setSelectedCategory('desktop')
+            }
 
-    const handleAiClick = () => {
-        selectCategory.setSelectedCategory('ai')
-    }
+            const handleAiClick = () => {
+                selectCategory.setSelectedCategory('ai')
+            }
+
+            return {
+                handleWebClick,
+                handleMobileClick,
+                handledesktopClick,
+                handleAiClick
+            }
+        }
+    })
+
 </script>
 
 <template> 
-    <div class="categoryHeaderContainer">
+    <header class="categoryHeaderContainer">
         <div class="titleContainer">
             <h1 class="title">Categorias</h1>
         </div>
@@ -32,14 +47,14 @@
             <CategoryButtonVue :buttonChildren="'Desktop'" :click="handledesktopClick"/>
             <CategoryButtonVue :buttonChildren="'AI'" :click="handleAiClick"/>
         </div>
-    </div>
+    </header>
 </template>
+
 <style scoped>
     .categoryHeaderContainer {
+        grid-area: headerCategory;
         position: sticky;
         top: 0;
-        width: 100%;
-        height: 64px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -68,4 +83,4 @@
         align-items: center;
         justify-content: center;
     }
-</style>
+</style> 

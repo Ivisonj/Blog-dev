@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import FooterComponentVue from '../components/FooterComponent.vue'
-    import HeaderCategoryVue from '../components/HeaderCategory.vue'
-    import HeaderComponentVue from '../components/HeaderComponent.vue'
+    // import FooterComponentVue from '../components/FooterComponent.vue'
+    // import HeaderCategoryVue from '../components/HeaderCategory.vue'
+    // import HeaderComponentVue from '../components/HeaderComponent.vue'
 
     interface CardDataTypes {
         id: string
@@ -10,6 +10,7 @@
         createdAt: string
         imageUrl: string
         category?: string
+        content?: string 
     }
 
      const cardData: CardDataTypes[] = [
@@ -30,7 +31,7 @@
 
 <template>
   <main class="articlePageContainer">
-    <HeaderComponentVue />
+    <!-- <HeaderComponentVue />
     <HeaderCategoryVue />
     <div class="articlePageContent">
         <div class="articleInfor">
@@ -44,7 +45,7 @@
         <div class="articalContent">
             Este artigo,,,
         </div>
-    </div>
+    </div> -->
     <!-- <FooterComponentVue /> -->
   </main>
 </template>

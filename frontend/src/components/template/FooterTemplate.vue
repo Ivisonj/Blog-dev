@@ -1,19 +1,25 @@
-<script setup lang="ts">
-    import LogoComponentVue from "./LogoComponent.vue"
+<script lang="ts">
+import { defineComponent } from 'vue'
+import LogoComponentVue from '../LogoComponent.vue'
+
+export default defineComponent({
+    name: 'FooterTemplate', 
+    components: { LogoComponentVue }
+})
 </script>
 
 <template> 
-    <div class="footerContainer">
+    <footer class="footerContainer">
         <div class="leftCol">
             <LogoComponentVue />
             <p class="copyright">© 2024 Blog.Dev</p>
         </div>
-    </div>
+    </footer>
 </template>
+
 <style scoped>
     .footerContainer {
-        width: 100%;
-        height: 300px;
+        grid-area: footer;
         padding: 56px 50px;
         background-color: #141434;
     }
@@ -30,4 +36,4 @@
         font-size: 1rem; 
         color: #ffffff;
     }
-</style>
+</style> 

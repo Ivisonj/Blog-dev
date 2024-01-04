@@ -1,12 +1,15 @@
-<script setup lang="ts">
-    import { ref, defineProps } from 'vue'
+<script lang="ts">
+    import { defineComponent } from 'vue'
 
-    const props = defineProps({
-        imageUrl: String, 
-        title: String,
-        description: String, 
-        createdAt: String,
-        category: String
+    export default defineComponent({
+        name: 'CardComponent', 
+        props: {
+            imageUrl: String, 
+            title: String,
+            description: String, 
+            createdAt: String,
+            category: String
+        }
     })
 </script>
 

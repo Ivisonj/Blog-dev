@@ -1,23 +1,28 @@
-<script setup lang="ts">
-    import LoginButtonVue from "./LoginButton.vue"
-    import LogoComponentVue from "./LogoComponent.vue"
+<script lang="ts">
+import { defineComponent } from 'vue'
+import LoginButtonVue from '../LoginButton.vue'
+import LogoComponentVue from '../LogoComponent.vue'
+
+export default defineComponent({
+    name: 'HeaderTemplate',
+    components: { LogoComponentVue, LoginButtonVue }
+})
 </script>
 
-<template>
-    <div class="headerContainer">
-        <div class="logo">
+<template> 
+    <header class="headerContainer">
+         <div class="logo">
             <LogoComponentVue />
         </div>
         <div class="menuContainer">
             <LoginButtonVue />
         </div>
-    </div>
+    </header>
 </template>
 
 <style scoped>
-     .headerContainer {
-        width: 100%;
-        height: 64px;
+    .headerContainer {
+        grid-area: header;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -26,16 +31,18 @@
     }
 
     .logo {
-        width: 200px;
+        width: auto;
         height: 100%;
+        margin-left: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .menuContainer {
-        width: 200px;
+        width: auto;
         height: 100%;
+        margin-right: 50px;
         display: flex;
         align-items: center;
         justify-content: center;

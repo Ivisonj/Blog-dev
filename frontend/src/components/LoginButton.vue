@@ -1,11 +1,21 @@
-<script setup lang="ts">
+<script lang="ts">
     import { useRouter } from 'vue-router'
+    import { defineComponent } from 'vue'
 
-    const router = useRouter()
+    export default defineComponent({
+        name: 'LoginButton',
+        setup() {
+            const router = useRouter()
 
-    const navToLogin = () => {
-        router.push('/login')
-    }
+            const navToLogin = () => {
+                router.push('/login')
+            }
+
+            return {
+                navToLogin
+            }
+        }
+    })
 </script>
 
 <template> 

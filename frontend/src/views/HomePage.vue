@@ -1,9 +1,10 @@
-<script setup lang="ts">
-    import { capitalize, computed } from 'vue'
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import HeaderTemplateVue from '../components/template/HeaderTemplate.vue'
+    import HeaderCategoryTemplateVue from '../components/template/HeaderCategoryTemplate.vue'
+    import ContentTemplateVue from '../components/template/ContentTemplate.vue'
+    import FooterTemplateVue from '../components/template/FooterTemplate.vue'
     import CardComponentVue from '../components/CardComponent.vue'
-    import FooterComponentVue from '../components/FooterComponent.vue'
-    import HeaderCategoryVue from '../components/HeaderCategory.vue'
-    import HeaderComponentVue from '../components/HeaderComponent.vue'
     import { useSelectCategory } from '../stores/selectCategory'
 
     interface CardDataTypes {
@@ -50,47 +51,72 @@
         }
     ]
 
-    const selectCategory = useSelectCategory()
+    export default defineComponent({
+        name: 'HomePage', 
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue }, 
+        setup() {
+            const selectCategory = useSelectCategory()
 
-    const filterByCategory = computed(() => {
-        return cardData.filter(item => item.category === selectCategory.selectedCategory)
+            const capitalizeFirstLetter = (string) => {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+            const filterByCategory = () => {
+                return cardData.filter(item => item.category === selectCategory.selectedCategory)
+            }
+
+            return {
+                capitalizeFirstLetter,
+                selectCategory, 
+                filterByCategory
+            }
+        }
     })
-
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
 </script>
 
+
 <template>
-    <div class="homeContainer">
-        <HeaderComponentVue />
-        <HeaderCategoryVue />
-        <div class="categoryTitle">
-            <h1 class="title">
-                {{ capitalizeFirstLetter(selectCategory.selectedCategory) }}
-            </h1>
-            <h3 class="subtitle">
-                {{ `Artigos sobre desenvolvimento ${capitalizeFirstLetter(selectCategory.selectedCategory)}` }}
-            </h3>
-        </div>
-        <div class="articlesContainer">
-            <CardComponentVue 
-                v-for="card in filterByCategory" 
-                :key="card.id" 
-                :title="card.title"
-                :description="card.description"
-                :createdAt="card.createdAt"
-                :imageUrl="card.imageUrl"
-            />
-        </div>
-        <FooterComponentVue />
-    </div>
+    <main class="homeContainer">
+        <HeaderTemplateVue />
+        <HeaderCategoryTemplateVue />
+        <ContentTemplateVue>
+            <div class="categoryTitle">
+                <h1 class="title">
+                    {{ capitalizeFirstLetter(selectCategory.selectedCategory) }}
+                </h1>
+                <h3 class="subtitle">
+                    {{ `Artigos sobre desenvolvimento ${capitalizeFirstLetter(selectCategory.selectedCategory)}` }}
+                </h3>
+            </div>
+             <div class="articlesContainer">
+                <CardComponentVue 
+                    v-for="card in filterByCategory()" 
+                    :key="card.id" 
+                    :title="card.title"
+                    :description="card.description"
+                    :imageUrl="card.imageUrl"
+                    :createdAt="card.createdAt"
+                    :category="card.category"
+                />
+            </div>
+        </ContentTemplateVue>
+        <FooterTemplateVue />
+    </main>
 </template>
 
 <style scoped>
     .homeContainer {
-        width: 100vw;
         height: 100vh;
+        display: grid;
+        grid-template-rows: 64px 64px 1fr 300px;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "headerCategory"
+            "content"
+            "footer"
+        ;
+
     }
 
     .categoryTitle {
