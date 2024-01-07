@@ -4,10 +4,12 @@
     import HeaderCategoryTemplateVue from '../components/template/HeaderCategoryTemplate.vue'
     import ContentTemplateVue from '../components/template/ContentTemplate.vue'
     import FooterTemplateVue from '../components/template/FooterTemplate.vue'
+    import TipTapComponentVue from '../components/TipTapComponent.vue'
+    import FormButtonVue from '../components/FormButton.vue'
 
     export default defineComponent({
         name: 'CreateArticlePage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue },
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, TipTapComponentVue, FormButtonVue },
     })
 </script>
 
@@ -21,15 +23,15 @@
                 <form action="">
                     <div class="w-75 mb-2 mt-3">
                         <label for="InputTitle" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="InputTitle">
+                        <input type="text" class="form-control" id="InputTitle" placeholder="Digite um título...">
                     </div>
                     <div class="w-75 mb-2 mt-3">
                         <label for="InputDescription" class="form-label">Descrição</label>
-                        <input type="text" class="form-control" id="InputDescription">
+                        <input type="text" class="form-control" id="InputDescription" placeholder="Digite uma descrição...">
                     </div>
                     <div class="w-75 mb-2 mt-3">
-                        <label for="InputImageUrl" class="form-label">Url da imagem</label>
-                        <input type="text" class="form-control" id="InputImageUrl">
+                        <label for="InputImageUrl" class="form-label">Imagem (URL)</label>
+                        <input type="text" class="form-control" id="InputImageUrl" placeholder="Url da imagem...">
                     </div>
                     <div class="w-75 mb-2 mt-3">
                         <label for="InputCategory" class="form-label">Categoria</label>
@@ -40,6 +42,13 @@
                             <option value="desktop">Desktop</option>
                             <option value="ai">Ai</option>
                         </select>
+                    </div>
+                    <div class="w-75 mb-2 mt-4">
+                        <label for="InputContent" class="form-label">Conteúdo</label>
+                        <TipTapComponentVue />
+                    </div>
+                    <div class="w-75 mb-2 mt-5">
+                        <FormButtonVue :buttonChildren="'CRIAR'" :buttonType="submit" />
                     </div>
                 </form>
             </div>
