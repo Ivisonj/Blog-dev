@@ -18,8 +18,11 @@ import { faListOl } from "@fortawesome/free-solid-svg-icons"
 import { faParagraph } from "@fortawesome/free-solid-svg-icons"
 import { faWindowMinimize } from "@fortawesome/free-solid-svg-icons"
 import { faSquare } from "@fortawesome/free-solid-svg-icons"
+import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
-library.add(faBold, faItalic, faStrikethrough, faUndo, faRepeat, faList, faCode, faListOl, faParagraph, faWindowMinimize, faSquare)
+
+library.add(faBold, faItalic, faStrikethrough, faUndo, faRepeat, faList, faCode, faListOl, faParagraph, faWindowMinimize, faSquare, faBars, faTrash)
 
 import App from './App.vue'
 import router from './router'

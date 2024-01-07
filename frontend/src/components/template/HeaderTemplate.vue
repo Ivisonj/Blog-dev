@@ -1,12 +1,13 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import LoginButtonVue from '../LoginButton.vue'
-import LogoComponentVue from '../LogoComponent.vue'
+    import { defineComponent } from 'vue'
+    import DropdownComponentVue from '../DropdownComponent.vue'
+    import LoginButtonVue from '../LoginButton.vue'
+    import LogoComponentVue from '../LogoComponent.vue'
 
-export default defineComponent({
-    name: 'HeaderTemplate',
-    components: { LogoComponentVue, LoginButtonVue }
-})
+    export default defineComponent({
+        name: 'HeaderTemplate',
+        components: { LogoComponentVue, LoginButtonVue, DropdownComponentVue }
+    })
 </script>
 
 <template> 
@@ -15,7 +16,8 @@ export default defineComponent({
             <LogoComponentVue />
         </div>
         <div class="menuContainer">
-            <LoginButtonVue />
+            <!-- <LoginButtonVue /> -->
+            <DropdownComponentVue />
         </div>
     </header>
 </template>

@@ -7,9 +7,11 @@ export default defineComponent({
 </script>
 
 <template> 
-    <h1 class="logoTitle">
-        Blog<span class="logoTitle2">.Dev</span>
-    </h1>
+    <a href="/" style="textDecoration: none">
+        <h1 class="logoTitle">
+            Blog<span class="logoTitle2">.Dev</span>
+        </h1>
+    </a>
 </template>
 <style scoped>
     .logoTitle {

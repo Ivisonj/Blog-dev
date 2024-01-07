@@ -38,15 +38,15 @@ import { defineComponent } from "vue"
         <form class="loginForm">
           <div class="w-75 mb-2 mt-3">
             <label for="InputName" class="form-label text-white">Nome</label>
-            <input type="text" class="form-control" id="InputName" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="InputName" placeholder="Digite o seu nome completo...">
           </div>
           <div class="w-75 mb-2">
             <label for="InputEmail" class="form-label text-white">E-mail</label>
-            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="InputEmail" placeholder="Digite o seu E-mail...">
           </div>
           <div class="w-75 mb-4">
             <label for="InputPassword" class="form-label text-white">Senha</label>
-            <input type="password" class="form-control" id="InputPassword">
+            <input type="password" class="form-control" id="InputPassword" placeholder="Digite a sua senha...">
           </div>
           <FormButtonVue :buttonChildren="'Cadastrar'" :buttonType="submit"/>
         </form>
@@ -65,11 +65,11 @@ import { defineComponent } from "vue"
         <form class="loginForm">
           <div class="w-75 mb-3 mt-3">
             <label for="InputEmail" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="InputEmail" placeholder="Digite o seu E-mail...">
           </div>
           <div class="w-75 mb-4">
             <label for="InputPassword" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="InputPassword">
+            <input type="password" class="form-control" id="InputPassword" placeholder="Digite a sua senha...">
           </div>
           <FormButtonVue :buttonChildren="'ENTRAR'" :buttonType="submit"/>
         </form>
