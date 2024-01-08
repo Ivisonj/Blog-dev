@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import express from 'express'
+import cors from 'cors'
 
 import UserRepositoryPrisma from './external/db/UserRepositoryPrisma'
 import PasswordCryto from './external/auth/PasswordCryto'
@@ -28,6 +29,7 @@ import DeleteArticleController from './external/api/DeleteArticleController'
 const app = express()
 const port = process.env.API_PORT ?? 4000
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -74,7 +76,7 @@ new SalveArticleController(app, saveArticle, userMid)
 //---Get all Articles
 const getArticles = new GetArticles(articleRepository)
 
-new GetArticlesController(app, getArticles, userMid)
+new GetArticlesController(app, getArticles)
 
 //--- get article by Id
 const getArticleById = new GetArticleById(articleRepository)

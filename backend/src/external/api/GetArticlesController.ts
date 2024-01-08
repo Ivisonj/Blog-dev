@@ -5,9 +5,8 @@ export default class GetArticlesController {
     constructor(
         readonly server: Express, 
         readonly useCase: GetArticles, 
-        ...middlewares: any[] 
     ) {
-        server.get('/api/articles', ...middlewares, async (req, res) => {
+        server.get('/api/articles', async (req, res) => {
             try {
                 const articles = await useCase.execute()
                 res.status(200).json(articles)
