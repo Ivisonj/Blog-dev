@@ -1,11 +1,31 @@
 <script lang="ts">
   import FormButtonVue from "./FormButton.vue"
   import { useSelectForm } from '../stores/selectForm'
-import { defineComponent } from "vue"
+  import { defineComponent } from "vue"
+  import axios from 'axios'
+  import { baseUrl } from '../global'
 
   export default defineComponent({
     name: 'LoginForm', 
-    components: { FormButtonVue }, 
+    components: { FormButtonVue },
+    data: function() {
+      return {
+        user: {
+          name: '', 
+          email: '', 
+          password: ''
+        }
+      }
+    },
+    methods: {
+      registerUser() {
+        console.log(this.user)
+        const url = `${baseUrl}/api/user/register`
+        axios.post(url, this.user)
+          .then(res => console.log(res))
+          .catch(err => console.error(err))
+      }
+    },
     setup() {
       const selectForm = useSelectForm()
 
@@ -35,18 +55,18 @@ import { defineComponent } from "vue"
         >
           Cadastrar
         </h1>
-        <form class="loginForm">
+        <form class="loginForm" @submit.prevent="registerUser">
           <div class="w-75 mb-2 mt-3">
             <label for="InputName" class="form-label text-white">Nome</label>
-            <input type="text" class="form-control" id="InputName" placeholder="Digite o seu nome completo...">
+            <input v-model="user.name" type="text" class="form-control" id="InputName" placeholder="Digite o seu nome completo...">
           </div>
           <div class="w-75 mb-2">
             <label for="InputEmail" class="form-label text-white">E-mail</label>
-            <input type="email" class="form-control" id="InputEmail" placeholder="Digite o seu E-mail...">
+            <input v-model="user.email" type="email" class="form-control" id="InputEmail" placeholder="Digite o seu E-mail...">
           </div>
           <div class="w-75 mb-4">
             <label for="InputPassword" class="form-label text-white">Senha</label>
-            <input type="password" class="form-control" id="InputPassword" placeholder="Digite a sua senha...">
+            <input v-model="user.password" type="password" class="form-control" id="InputPassword" placeholder="Digite a sua senha...">
           </div>
           <FormButtonVue :buttonChildren="'Cadastrar'" :buttonType="submit"/>
         </form>

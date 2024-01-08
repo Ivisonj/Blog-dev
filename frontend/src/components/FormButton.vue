@@ -5,10 +5,6 @@
         name: 'FormButton', 
         props: {
                 buttonChildren: String,
-                buttonType: {
-                type: String,
-                default:'button'
-            }   ,
             // handleClick: Function
         }
     })
@@ -16,7 +12,7 @@
 
 <template>
     <div class="buttonContainer">
-        <button class="button" :type="buttonType">
+        <button class="button" type="submit">
             {{ buttonChildren }}
         </button>
     </div>
