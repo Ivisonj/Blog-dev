@@ -4,6 +4,17 @@
 
     export default defineComponent({
         name: 'DropdownComponent',
+        setup() {
+            const router = useRouter()
+            const logout = () => {
+                window.localStorage.removeItem('token')
+                router.push('/')
+                window.location.reload()
+            }
+            return {
+                logout
+            }
+        }
     })
 </script>
 
@@ -15,7 +26,7 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="/create">Criar Artigo</a></li>
             <li><a class="dropdown-item" href="/my-articles">Meus Artigos</a></li>
-            <li><a class="dropdown-item" href="#">Sair</a></li>
+            <li><div class="dropdown-item" @click="logout">Sair</div></li>
         </ul>
     </div>
 </template>

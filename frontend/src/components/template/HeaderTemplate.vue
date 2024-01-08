@@ -6,7 +6,20 @@
 
     export default defineComponent({
         name: 'HeaderTemplate',
-        components: { LogoComponentVue, LoginButtonVue, DropdownComponentVue }
+        components: { LogoComponentVue, LoginButtonVue, DropdownComponentVue }, 
+        data() {
+            return {
+                token: null
+            }
+        }, 
+        methods: {
+            checkToken() {
+                this.token = window.localStorage.getItem('token')
+            }
+        }, 
+        mounted() {
+            this.checkToken()
+        }
     })
 </script>
 
@@ -16,8 +29,8 @@
             <LogoComponentVue />
         </div>
         <div class="menuContainer">
-            <!-- <LoginButtonVue /> -->
-            <DropdownComponentVue />
+            <LoginButtonVue v-if="!token"/>
+            <DropdownComponentVue v-if="token" />
         </div>
     </header>
 </template>

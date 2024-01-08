@@ -4,7 +4,7 @@
   import { defineComponent } from "vue"
   import axios from 'axios'
   import { baseUrl } from '../global'
-
+  
   export default defineComponent({
     name: 'LoginForm', 
     components: { FormButtonVue },
@@ -14,15 +14,27 @@
           name: '', 
           email: '', 
           password: ''
+        }, 
+        login: {
+          email: '', 
+          password: ''
         }
       }
     },
     methods: {
       registerUser() {
-        console.log(this.user)
         const url = `${baseUrl}/api/user/register`
         axios.post(url, this.user)
           .then(res => console.log(res))
+          .catch(err => console.error(err))
+      },  
+      loginUser() {
+         const url = `${baseUrl}/api/user/login`
+         axios.post(url, this.login)
+           .then(res => {
+              window.localStorage.setItem('token', res.data.token)
+              window.location = '/'
+          })
           .catch(err => console.error(err))
       }
     },
@@ -82,14 +94,14 @@
         >
           Login
         </h1>
-        <form class="loginForm">
+        <form class="loginForm" @submit.prevent="loginUser">
           <div class="w-75 mb-3 mt-3">
             <label for="InputEmail" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="InputEmail" placeholder="Digite o seu E-mail...">
+            <input v-model="login.email" type="email" class="form-control" id="InputEmail" placeholder="Digite o seu E-mail...">
           </div>
           <div class="w-75 mb-4">
             <label for="InputPassword" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="InputPassword" placeholder="Digite a sua senha...">
+            <input v-model="login.password" type="password" class="form-control" id="InputPassword" placeholder="Digite a sua senha...">
           </div>
           <FormButtonVue :buttonChildren="'ENTRAR'" :buttonType="submit"/>
         </form>

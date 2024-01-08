@@ -74,7 +74,6 @@
     })
 </script>
 
-
 <template>
     <main class="homeContainer">
         <HeaderTemplateVue />
