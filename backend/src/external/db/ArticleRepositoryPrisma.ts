@@ -60,6 +60,22 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         }
     }
 
+    async getArticlesByUserId(id: string): Promise<Article[] | null> {
+        const articles = await this.prisma.articles.findMany({
+            where: { userId: id }
+        })
+        return articles.map((article) => ({
+            id: article.id,
+            title: article.title, 
+            description: article.description,
+            imageUrl: article.imageUrl,
+            category: article.category,  
+            createdAt: article.createdAt, 
+            userId: article.userId, 
+            content: article.content
+        }))
+    }
+
     async deleteArticle(id: string): Promise<void> {
         const article = await this.prisma.articles.delete({
             where: { id: id }

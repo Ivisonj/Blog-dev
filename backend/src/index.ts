@@ -25,6 +25,8 @@ import GetArticleById from './core/article/service/GetArticleById'
 import GetArticleByIdController from './external/api/GetArticleByIdController'
 import DeleteArticle from './core/article/service/DeleteArticle'
 import DeleteArticleController from './external/api/DeleteArticleController'
+import GetArticlesByUserId from './core/article/service/GetArticlesByUserId'
+import GetArticlesByUserIdController from './external/api/GetArticlesByUserIdController'
 
 const app = express()
 const port = process.env.API_PORT ?? 4000
@@ -39,6 +41,7 @@ app.listen(port, () => {
 
 //--------------------open routes------------------------------------//
 const userRepository = new UserRepositoryPrisma()
+const articleRepository = new ArticleRepositoryPrisma()
 const cryptoProvider = new PasswordCryto()
 
 //---Register User
@@ -50,6 +53,15 @@ new RegisterUserController(app, registerUser)
 const userLogin = new UserLogin(userRepository, cryptoProvider)
 
 new UserLoginController(app, userLogin)
+
+//---Get all Articles
+const getArticles = new GetArticles(articleRepository)
+
+new GetArticlesController(app, getArticles)
+
+//--- get article by Id
+const getArticleById = new GetArticleById(articleRepository)
+new GetArticleByIdController(app, getArticleById)
 
 //-----------------Protected routes---------------------------------//
 //---Get All Users
@@ -67,20 +79,12 @@ const deleteUser = new DeleUser(userRepository)
 new DeleteUserController(app, deleteUser, userMid)
 
 //---salve article
-const articleRepository = new ArticleRepositoryPrisma()
-
 const saveArticle = new SaveArticle(articleRepository)
-
 new SalveArticleController(app, saveArticle, userMid)
 
-//---Get all Articles
-const getArticles = new GetArticles(articleRepository)
-
-new GetArticlesController(app, getArticles)
-
-//--- get article by Id
-const getArticleById = new GetArticleById(articleRepository)
-new GetArticleByIdController(app, getArticleById, userMid)
+//get articles by userId
+const getArticlesByUserId = new GetArticlesByUserId(articleRepository)
+new GetArticlesByUserIdController(app, getArticlesByUserId, userMid)
 
 //---delete article
 const deleteArticle = new DeleteArticle(articleRepository)

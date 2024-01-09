@@ -5,9 +5,8 @@ export default class GetArticleByIdController {
     constructor(
         readonly server: Express, 
         readonly useCase: GetArticleById, 
-        ...middleware: any[]
     ) {
-        server.get('/api/article/:id', ...middleware, async (req, res) => {
+        server.get('/api/article/:id', async (req, res) => {
             try {
                 const article = await useCase.execute({
                     articleId: (req.params as any).id 
