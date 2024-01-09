@@ -21,6 +21,7 @@
     "@tiptap/vue-3": "^2.1.13",
     "axios": "^1.6.3",
     "bootstrap": "^5.3.2",
+    "date-fns": "^3.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"

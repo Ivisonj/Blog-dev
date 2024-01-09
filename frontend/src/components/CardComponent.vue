@@ -1,24 +1,30 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
     import { useRouter } from 'vue-router'
+    import { format, parseISO } from 'date-fns'
+    import { ptBR } from 'date-fns/locale'
 
     export default defineComponent({
         name: 'CardComponent', 
         props: {
+            id: String,
             imageUrl: String, 
             title: String,
             description: String, 
             createdAt: String,
             category: String
         }, 
-        setup() {
+        setup(props) {
             const router = useRouter()
             const navigate = () => {
-                router.push('/article')
+                router.push(`/article/${props.id}`)
             }
 
+             const formattedDate = format(parseISO(props.createdAt), 'dd \'de\' MMMM, yyyy', { locale: ptBR })
+
             return {
-                navigate
+                navigate, 
+                formattedDate
             }
         }
     })
@@ -42,7 +48,7 @@
             </div>
             <div class="createdAtContainer">
                 <h3 class="createdAt">
-                    {{ createdAt }}
+                    {{ formattedDate }}
                 </h3>
             </div>
         </div>
@@ -66,12 +72,12 @@
 
     .articleImage {
         width: 100%;
-        height: 50%;
+        height: 55%;
     }
 
     .articleContainer .articleInfor {
         width: 100%;
-        height: 50%;
+        height: 45%;
         padding: 10px 25px;
     }
     
@@ -105,4 +111,4 @@
         font-size: 0.9rem;
         font-weight: 100;
     }
-</style>
+</style> 

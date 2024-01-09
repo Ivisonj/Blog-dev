@@ -1,9 +1,14 @@
 <script lang="ts">
+    import { useRoute } from 'vue-router'
     import { defineComponent } from 'vue'
     import HeaderTemplateVue from '../components/template/HeaderTemplate.vue'
     import HeaderCategoryTemplateVue from '../components/template/HeaderCategoryTemplate.vue'
     import ContentTemplateVue from '../components/template/ContentTemplate.vue'
     import FooterTemplateVue from '../components/template/FooterTemplate.vue'
+    import { baseUrl } from '../global'
+    import { axiosAuth } from '../config/axiosConfig'
+    import { format, parseISO } from 'date-fns'
+    import { ptBR } from 'date-fns/locale'
 
     interface CardDataTypes {
         id: string
@@ -15,20 +20,29 @@
         content?: string 
     }
 
-     const cardData: CardDataTypes[] = [
-        {
-            id: '1', 
-            title: 'Este tem a categoria Web',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'web'
-        },
-    ]
-
     export default defineComponent({
         name: 'ArticlePage', 
         components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue },
+        data() {
+            return {
+                article: []
+            }
+        },
+        methods: {
+            loadArticle() {
+                const router = useRoute()
+                const url = `${baseUrl}/api/article/${router.params.id}`
+                axiosAuth.get(url)
+                    .then(res => {
+                        res.data.createdAt = format(parseISO(res.data.createdAt), 'dd \'de\' MMMM, yyyy', { locale: ptBR })
+                        this.article = res.data
+                    })
+                    .catch(err => console.error(err))
+            }
+        },
+        mounted() {
+            this.loadArticle()
+        },
         setup() {
             const capitalizeFirstLetter = (str: string) => {
                 return str.charAt(0).toUpperCase() + str.slice(1);
@@ -36,7 +50,6 @@
 
             return {
                 capitalizeFirstLetter, 
-                cardData
             }
         }
     })
@@ -49,22 +62,21 @@
         <ContentTemplateVue>
             <div class="articlePageContent">
                 <div class="articleInfor">
-                    <h3 class="articleCategory"> {{ `Categoria: ${capitalizeFirstLetter(cardData[0].category)}` }}</h3>
-                    <h1 class="articleTitle">{{ cardData[0].title }}</h1>
-                    <h3 class="createdAt">{{ cardData[0].createdAt }}</h3>
+                    <h3 class="articleCategory">{{ article.category ? `Categoria: ${capitalizeFirstLetter(article.category)}` : '' }}</h3>
+                    <h1 class="articleTitle">{{ article.title }}</h1>
+                    <h3 class="createdAt">{{ article.createdAt }}</h3>
                 </div>
                 <div class="imageContainer">
-                    <img class="articleImage" :src="cardData[0].imageUrl" alt="img">
+                    <img class="articleImage" :src="article.imageUrl" alt="img">
                 </div>
-                <div class="articalContent">
-                    Este artigo,,,
-                </div>
+                <div class="articalContent" v-html="article.content"/>
             </div>
         </ContentTemplateVue>
         <FooterTemplateVue />
   </main>
 </template>
-<style scoped>
+
+<style>
     .articlePageContainer {
         height: 100vh;
         display: grid;
@@ -101,7 +113,7 @@
     }
 
     .articleInfor .articleTitle {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         font-weight: bold;
         margin-bottom: 20px;
     }
@@ -128,4 +140,50 @@
         margin: 30px 0px 40px 0px;
     }
 
+    ul,
+    ol {
+        padding: 0 1rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+        line-height: 1.1;
+    }
+
+    code {
+        background-color: rgba(#616161, 0.1);
+        color: #616161;
+    }
+
+    pre {
+        background: #0D0D0D;
+        color: #FFF;
+        font-family: 'JetBrainsMono', monospace;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+    }
+
+    pre code {
+        color: inherit;
+        padding: 0;
+        background: none;
+        font-size: 0.8rem;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    blockquote {
+        padding-left: 1rem;
+        border-left: 2px solid rgba(#0D0D0D, 0.1);
+    }
+
+    hr {
+        border: none;
+        border-top: 2px solid rgba(#0D0D0D, 0.1);
+        margin: 2rem 0;
+    }
 </style>
