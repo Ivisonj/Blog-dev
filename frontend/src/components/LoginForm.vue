@@ -33,6 +33,7 @@
          axios.post(url, this.login)
            .then(res => {
               window.localStorage.setItem('token', res.data.token)
+              window.localStorage.setItem('userId', res.data.userId)
               window.location = '/'
           })
           .catch(err => console.error(err))

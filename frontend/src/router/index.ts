@@ -19,7 +19,7 @@ const router = createRouter({
       component: LoginPage
     },
     {
-      path: '/article',
+      path: '/article/:id',
       name: 'article',
       component: ArticlePage
     },

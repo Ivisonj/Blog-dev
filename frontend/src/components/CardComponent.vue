@@ -1,5 +1,6 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
+    import { useRouter } from 'vue-router'
 
     export default defineComponent({
         name: 'CardComponent', 
@@ -9,12 +10,22 @@
             description: String, 
             createdAt: String,
             category: String
+        }, 
+        setup() {
+            const router = useRouter()
+            const navigate = () => {
+                router.push('/article')
+            }
+
+            return {
+                navigate
+            }
         }
     })
 </script>
 
 <template> 
-    <div class="articleContainer">
+    <div class="articleContainer" @click="navigate">
         <img 
             class="articleImage"
             :src="imageUrl" 

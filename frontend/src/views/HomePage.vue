@@ -1,11 +1,13 @@
 <script lang="ts">
-    import { defineComponent } from 'vue'
+    import { defineComponent, ref } from 'vue'
     import HeaderTemplateVue from '../components/template/HeaderTemplate.vue'
     import HeaderCategoryTemplateVue from '../components/template/HeaderCategoryTemplate.vue'
     import ContentTemplateVue from '../components/template/ContentTemplate.vue'
     import FooterTemplateVue from '../components/template/FooterTemplate.vue'
     import CardComponentVue from '../components/CardComponent.vue'
     import { useSelectCategory } from '../stores/selectCategory'
+    import { axiosAuth } from '../config/axiosConfig'
+    import { baseUrl } from '../global'
 
     interface CardDataTypes {
         id: string
@@ -16,60 +18,40 @@
         category?: string
     }
 
-    const cardData: CardDataTypes[] = [
-        {
-            id: '1', 
-            title: 'Este tem a categoria Web',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'web'
-        },
-        {
-            id: '2', 
-            title: 'Este tem a categoria Mobile',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'mobile'
-        },
-        {
-            id: '3', 
-            title: 'Este tem a categoria Desktop',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'desktop'
-        },
-        {
-            id: '4', 
-            title: 'Este tem a categoria Ai',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'ai'
-        }
-    ]
-
     export default defineComponent({
         name: 'HomePage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue }, 
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue },
         setup() {
+            const articles = ref([])
             const selectCategory = useSelectCategory()
+
+            const loadArticles = () => {
+                const url = `${baseUrl}/api/articles`
+                axiosAuth.get(url)
+                    .then(res => {
+                        articles.value = res.data
+                    })
+                    .catch(err => console.error(err))
+            }
 
             const capitalizeFirstLetter = (string) => {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             }
 
             const filterByCategory = () => {
-                return cardData.filter(item => item.category === selectCategory.selectedCategory)
+                return articles.value.filter(item => item.category === selectCategory.selectedCategory)
             }
 
             return {
+                articles,
+                loadArticles,
                 capitalizeFirstLetter,
                 selectCategory, 
                 filterByCategory
             }
+        },
+        mounted() {
+            this.loadArticles()
         }
     })
 </script>
@@ -144,3 +126,6 @@
         flex-wrap: wrap;
     }
 </style>
+
+
+    

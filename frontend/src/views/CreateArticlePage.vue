@@ -1,23 +1,19 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
     import HeaderTemplateVue from '../components/template/HeaderTemplate.vue'
-    import HeaderCategoryTemplateVue from '../components/template/HeaderCategoryTemplate.vue'
     import ContentTemplateVue from '../components/template/ContentTemplate.vue'
     import FooterTemplateVue from '../components/template/FooterTemplate.vue'
-    import TipTapComponentVue from '../components/TipTapComponent.vue'
-    import FormButtonVue from '../components/FormButton.vue'
     import ArticleFormVue from '../components/ArticleForm.vue'
 
     export default defineComponent({
         name: 'CreateArticlePage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, ArticleFormVue },
+        components: { HeaderTemplateVue, ContentTemplateVue, FooterTemplateVue, ArticleFormVue },
     })
 </script>
 
 <template>
   <main class="createArticlePage">
         <HeaderTemplateVue />
-        <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
             <div class="content">
                 <h1 class="title">Crie o seu artigo agora!</h1>
@@ -31,11 +27,10 @@
     .createArticlePage {
         height: 100vh;
         display: grid;
-        grid-template-rows: 64px 64px 1fr 300px;
+        grid-template-rows: 64px 1fr 300px;
         grid-template-columns: 1fr;
         grid-template-areas: 
             "header"
-            "headerCategory"
             "content"
             "footer"
         ;
