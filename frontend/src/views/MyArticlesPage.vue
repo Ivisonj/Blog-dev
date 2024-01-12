@@ -1,13 +1,21 @@
 <script lang="ts">
-    import { defineComponent } from 'vue'
+    import { defineComponent, ref } from 'vue'
     import HeaderTemplateVue from '../components/template/HeaderTemplate.vue'
     import HeaderCategoryTemplateVue from '../components/template/HeaderCategoryTemplate.vue'
     import ContentTemplateVue from '../components/template/ContentTemplate.vue'
     import FooterTemplateVue from '../components/template/FooterTemplate.vue'
-    import CardComponentVue from '../components/CardComponent.vue'
     import { useSelectCategory } from '../stores/selectCategory'
     import MyArticleCardVue from '../components/MyArticleCard.vue'
+    import { baseUrl } from '../global'
+    import { axiosAuth } from '../config/axiosConfig'
+    import { useRoute } from 'vue-router'
+    import { format, parseISO } from 'date-fns'
+    import { ptBR } from 'date-fns/locale'
+    import { useStatusError } from '../stores/statusError'
+    import { useMessageError } from '../stores/msgError'
 
+    import AlertComponentVue from '../components/AlertComponent.vue'
+    
     interface CardDataTypes {
         id: string
         title: string
@@ -17,70 +25,64 @@
         category?: string
     }
 
-    const cardData: CardDataTypes[] = [
-        {
-            id: '1', 
-            title: 'Este tem a categoria Web',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'web'
-        },
-        {
-            id: '2', 
-            title: 'Este tem a categoria Mobile',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'mobile'
-        },
-        {
-            id: '3', 
-            title: 'Este tem a categoria Desktop',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'desktop'
-        },
-        {
-            id: '4', 
-            title: 'Este tem a categoria Ai',
-            description: 'Este artigo trata sobre como usar as callbacks em JavaScript, além disso traz exemplos práticos sobre esse assunto tão importante.',
-            createdAt: '  30 de Novembro, 2023', 
-            imageUrl: 'https://blog.milvus.com.br/wp-content/uploads/tic_nas_empresas.jpg', 
-            category: 'ai'
-        }
-    ]
-
     export default defineComponent({
         name: 'MyArticlesPage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, MyArticleCardVue }, 
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, MyArticleCardVue, AlertComponentVue }, 
         setup() {
+            const articles = ref([])
             const selectCategory = useSelectCategory()
+            const statusError = useStatusError()
+            const messageError = useMessageError()
+ 
+            const loadArticles = () => {
+                const userId = window.localStorage.getItem('userId')
+                const url = `${baseUrl}/api/my-articles/${userId}`
+                axiosAuth.get(url)
+                    .then(res => {
+                        articles.value = res.data
+                    })
+                    .catch(err => {
+                        console.error(err)
+                        statusError.setSatus(err.response.status)
+                        messageError.setMessage(err.message)
+                    })
+            }
+
+            const formatDate = (date: string) => {
+                return format(parseISO(date), 'dd \'de\' MMMM, yyyy', { locale: ptBR })
+            }
 
             const capitalizeFirstLetter = (string) => {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             }
 
             const filterByCategory = () => {
-                return cardData.filter(item => item.category === selectCategory.selectedCategory)
+                return articles.value.filter(item => item.category === selectCategory.selectedCategory)
             }
 
             return {
+                articles,
+                loadArticles,
                 capitalizeFirstLetter,
                 selectCategory, 
-                filterByCategory
+                filterByCategory, 
+                formatDate, 
+                statusError,
+                messageError
             }
+        },
+        mounted() {
+            this.loadArticles()
         }
     })
 </script>
-
 
 <template>
     <main class="homeContainer">
         <HeaderTemplateVue />
         <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
+            <AlertComponentVue :message="messageError.message" :status="statusError.status"/>
             <div class="categoryTitle">
                 <h1 class="title">
                     Meus Artigos
@@ -93,10 +95,11 @@
                 <MyArticleCardVue 
                     v-for="card in filterByCategory()" 
                     :key="card.id" 
+                    :id="card.id"
                     :title="card.title"
                     :description="card.description"
                     :imageUrl="card.imageUrl"
-                    :createdAt="card.createdAt"
+                    :createdAt="formatDate(card.createdAt)"
                     :category="card.category"
                 />
             </div>

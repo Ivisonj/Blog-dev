@@ -89,17 +89,18 @@
     .titleContainer .articleTitle {
         font-size: 1.2rem;
         font-weight: 400;
+        margin: 0;
     }
 
     .articleInfor .descriptionContainer {
         width: 100%;
         height: 50%;
-        margin-top: 10px;
     }
 
     .descriptionContainer .articleDescription {
         font-size: 0.9rem;
         font-weight: 100;
+        margin: 0;
     }
 
     .articleInfor .createdAtContainer {
