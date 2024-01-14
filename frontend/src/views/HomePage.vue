@@ -8,6 +8,9 @@
     import { useSelectCategory } from '../stores/selectCategory'
     import { axiosAuth } from '../config/axiosConfig'
     import { baseUrl } from '../global'
+    import AlertComponentVue from '../components/AlertComponent.vue'
+    import { useStatusError } from '../stores/statusError'
+    import { useMessageError } from '../stores/msgError'
 
     interface CardDataTypes {
         id: string
@@ -20,18 +23,25 @@
 
     export default defineComponent({
         name: 'HomePage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue },
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue, AlertComponentVue },
         setup() {
             const articles = ref([])
             const selectCategory = useSelectCategory()
 
             const loadArticles = () => {
+                const statusError = useStatusError()
+                const messageError = useMessageError()
                 const url = `${baseUrl}/api/articles`
+
                 axiosAuth.get(url)
                     .then(res => {
                         articles.value = res.data
                     })
-                    .catch(err => console.error(err))
+                    .catch(err => {
+                        console.error(err)
+                        statusError.setSatus(err.response.status)
+                        messageError.setMessage(err.message)
+                    })
             }
 
             const capitalizeFirstLetter = (string) => {
@@ -61,15 +71,19 @@
         <HeaderTemplateVue />
         <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
+            <AlertComponentVue />
             <div class="categoryTitle">
                 <h1 class="title">
                     {{ capitalizeFirstLetter(selectCategory.selectedCategory) }}
                 </h1>
-                <h3 class="subtitle">
+                <h3 class="subtitle" v-if="filterByCategory().length > 0">
                     {{ `Artigos sobre desenvolvimento ${capitalizeFirstLetter(selectCategory.selectedCategory)}` }}
                 </h3>
+                <h3 class="subtitle" v-else>
+                    Oooops... Ainda não há artigos relacionados a este assunto! :(
+                </h3>
             </div>
-             <div class="articlesContainer">
+            <div class="articlesContainer">
                 <CardComponentVue 
                     v-for="card in filterByCategory()" 
                     :key="card.id" 
@@ -85,6 +99,7 @@
         <FooterTemplateVue />
     </main>
 </template>
+
 
 <style scoped>
     .homeContainer {

@@ -8,7 +8,6 @@
     import MyArticleCardVue from '../components/MyArticleCard.vue'
     import { baseUrl } from '../global'
     import { axiosAuth } from '../config/axiosConfig'
-    import { useRoute } from 'vue-router'
     import { format, parseISO } from 'date-fns'
     import { ptBR } from 'date-fns/locale'
     import { useStatusError } from '../stores/statusError'
@@ -82,26 +81,29 @@
         <HeaderTemplateVue />
         <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
-            <AlertComponentVue :message="messageError.message" :status="statusError.status"/>
+            <AlertComponentVue />
             <div class="categoryTitle">
                 <h1 class="title">
                     Meus Artigos
                 </h1>
-                <h3 class="subtitle">
+                <h3 class="subtitle" v-if="filterByCategory().length > 0">
                     {{ `Artigos sobre desenvolvimento ${capitalizeFirstLetter(selectCategory.selectedCategory)}` }}
+                </h3>
+                <h3 class="subtitle" v-else>
+                    Oooops... Você ainda não possui artigos sobre esse assunto!
                 </h3>
             </div>
              <div class="articlesContainer">
-                <MyArticleCardVue 
-                    v-for="card in filterByCategory()" 
-                    :key="card.id" 
-                    :id="card.id"
-                    :title="card.title"
-                    :description="card.description"
-                    :imageUrl="card.imageUrl"
-                    :createdAt="formatDate(card.createdAt)"
-                    :category="card.category"
-                />
+                    <MyArticleCardVue 
+                        v-for="card in filterByCategory()" 
+                        :key="card.id" 
+                        :id="card.id"
+                        :title="card.title"
+                        :description="card.description"
+                        :imageUrl="card.imageUrl"
+                        :createdAt="formatDate(card.createdAt)"
+                        :category="card.category"
+                    />
             </div>
         </ContentTemplateVue>
         <FooterTemplateVue />

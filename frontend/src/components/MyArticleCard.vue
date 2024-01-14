@@ -21,11 +21,12 @@
             }
 
             const deleteCard = () => {
-                console.log('deletou!')
-                // const url = `${baseUrl}/api/article/${props.id}`
-                // axiosAuth.delete(url)
-                //     .then(res => console.log(res))
-                //     .catch(err => console.error(err))
+                const url = `${baseUrl}/api/article/delete/${props.id}`
+                axiosAuth.delete(url)
+                    .then(res => console.log(res))
+                    .catch(err => console.error(err))
+
+                window.location.reload()
             }
 
             return {

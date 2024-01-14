@@ -1,9 +1,9 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap/dist/css/bootstrap.css'
+import createToast from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
@@ -21,7 +21,6 @@ import { faSquare } from "@fortawesome/free-solid-svg-icons"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
-
 library.add(faBold, faItalic, faStrikethrough, faUndo, faRepeat, faList, faCode, faListOl, faParagraph, faWindowMinimize, faSquare, faBars, faTrash)
 
 import App from './App.vue'
@@ -33,6 +32,16 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(createPinia())
 app.use(router)
+app.use(createToast, {
+    position: 'top-right',
+    duration: 3000,
+    className: ['vue3-toastify__toast'],
+    icon: {
+        name: 'check',
+        after: false 
+    },
+})
 
 app.mount('#app')
+
 

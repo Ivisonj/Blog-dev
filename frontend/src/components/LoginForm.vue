@@ -4,6 +4,7 @@
   import { defineComponent } from "vue"
   import axios from 'axios'
   import { baseUrl } from '../global'
+  import { showError } from '../global'
   
   export default defineComponent({
     name: 'LoginForm', 
@@ -26,7 +27,7 @@
         const url = `${baseUrl}/api/user/register`
         axios.post(url, this.user)
           .then(res => console.log(res))
-          .catch(err => console.error(err))
+          .catch(showError)
       },  
       loginUser() {
          const url = `${baseUrl}/api/user/login`
@@ -36,7 +37,7 @@
               window.localStorage.setItem('userId', res.data.userId)
               window.location = '/'
           })
-          .catch(err => console.error(err))
+          .catch(showError)
       }
     },
     setup() {

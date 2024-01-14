@@ -1,12 +1,14 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+    import { defineComponent } from 'vue'
+    import { useStatusError } from '../stores/statusError'
+    import { useMessageError } from '../stores/msgError'
 
 export default defineComponent({
     name: 'AlertComponent',
-    props: {
-        status: Number, 
-        message: String
-    }, 
+    // props: {
+    //     status: Number, 
+    //     message: String
+    // }, 
     mounted() {
         setTimeout(() => {
             this.$el.style.display = 'none'
@@ -14,17 +16,25 @@ export default defineComponent({
     },
     computed: {
         alertType() {
-            if(this.status >= 200 && this.status < 300) {
+            const statusError = useStatusError()
+            
+            if(statusError.status >= 200 && statusError.status < 300) {
                 return 'alert-success'
             }
-            if(this.status >= 400 && this.status < 500) {
+            if(statusError.status >= 400 && statusError.status < 500) {
                 return 'alert-warning'
             }
-            if(this.status >= 500 && this.status < 600) {
+            if(statusError.status >= 500 && statusError.status < 600) {
                 return 'alert-danger'
             }
 
-            return 'alert-info'
+            return ''
+        }
+    }, setup() {
+        const messageError = useMessageError()
+
+        return {
+            messageError
         }
     }
 })
@@ -32,13 +42,14 @@ export default defineComponent({
 
 <template> 
     <div :class="['alert', alertType]" role="alert">
-        {{ message }}
+        {{ messageError.message }}
     </div>
 </template>
 <style scoped>
     .alert {
         position: absolute;
         width: auto;
-        right: 20px;
+        right: 40px;
+        top: 60px;
     }
 </style>
