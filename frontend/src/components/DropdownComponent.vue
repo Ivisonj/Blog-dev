@@ -9,7 +9,9 @@
             const logout = () => {
                 window.localStorage.removeItem('token')
                 router.push('/')
-                window.location.reload()
+                if(router.currentRoute.value.path === '/') {
+                    window.location.reload()
+                }
             }
             return {
                 logout
@@ -34,5 +36,9 @@
 <style scoped>
     .btn-secondary.dropdown-toggle {
         background-color: #141434;
+    }
+
+    .dropdown-item {
+        cursor: pointer;
     }
 </style>

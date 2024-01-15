@@ -8,7 +8,6 @@
     import { useSelectCategory } from '../stores/selectCategory'
     import { axiosAuth } from '../config/axiosConfig'
     import { baseUrl } from '../global'
-    import AlertComponentVue from '../components/AlertComponent.vue'
     import { useStatusError } from '../stores/statusError'
     import { useMessageError } from '../stores/msgError'
 
@@ -23,7 +22,7 @@
 
     export default defineComponent({
         name: 'HomePage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue, AlertComponentVue },
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, CardComponentVue },
         setup() {
             const articles = ref([])
             const selectCategory = useSelectCategory()
@@ -71,7 +70,6 @@
         <HeaderTemplateVue />
         <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
-            <AlertComponentVue />
             <div class="categoryTitle">
                 <h1 class="title">
                     {{ capitalizeFirstLetter(selectCategory.selectedCategory) }}

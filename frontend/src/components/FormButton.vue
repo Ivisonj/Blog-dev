@@ -5,7 +5,6 @@
         name: 'FormButton', 
         props: {
                 buttonChildren: String,
-            // handleClick: Function
         }
     })
 </script>

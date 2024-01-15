@@ -2,27 +2,33 @@
     import { defineComponent } from 'vue'
     import { useSelectCategory } from '../../stores/selectCategory'
     import CategoryButtonVue from '../CategoryButton.vue'
+    import { useRouter } from 'vue-router'
 
     export default defineComponent({
         name: 'HeaderCategoryTemplate', 
         components: { CategoryButtonVue },
         setup() {
+            const router = useRouter()
             const selectCategory = useSelectCategory()
 
             const handleWebClick = () => {
                 selectCategory.setSelectedCategory('web')
+                router.push('/')
             }
 
             const handleMobileClick = () => {
                 selectCategory.setSelectedCategory('mobile')
+                router.push('/')
             }
 
             const handledesktopClick = () => {
                 selectCategory.setSelectedCategory('desktop')
+                router.push('/')
             }
 
             const handleAiClick = () => {
                 selectCategory.setSelectedCategory('ai')
+                router.push('/')
             }
 
             return {

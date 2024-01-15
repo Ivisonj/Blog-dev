@@ -5,6 +5,7 @@
   import axios from 'axios'
   import { baseUrl } from '../global'
   import { showError } from '../global'
+  import { useRouter } from 'vue-router'
   
   export default defineComponent({
     name: 'LoginForm', 
@@ -35,12 +36,13 @@
            .then(res => {
               window.localStorage.setItem('token', res.data.token)
               window.localStorage.setItem('userId', res.data.userId)
-              window.location = '/'
+              this.router.push('/')
           })
           .catch(showError)
       }
     },
     setup() {
+      const router = useRouter()
       const selectForm = useSelectForm()
 
       const handleSignupClick = () => {
@@ -54,7 +56,8 @@
       return {
         handleSignupClick, 
         handleLoginClick, 
-        selectForm
+        selectForm, 
+        router
       }
     }
   })
@@ -136,7 +139,7 @@
     position: absolute;
     left: -150px;
     width: 185%;
-    height: 90%;
+    height: 95%;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -149,6 +152,7 @@
   }
 
   .signupTitle {
+    margin-top: 5px;
     margin-bottom: 20px;
     color: #fff;
     font-weight: bold;

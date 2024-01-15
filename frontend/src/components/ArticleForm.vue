@@ -1,14 +1,18 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
+    import { useRouter } from 'vue-router'
     import FormButtonVue from './FormButton.vue'
     import TipTapComponentVue from './TipTapComponent.vue'
-    import axios from 'axios'
     import { baseUrl } from '../global'
     import { axiosAuth } from '../config/axiosConfig' 
 
     export default defineComponent({
         name: 'ArticleForm', 
-        components: { FormButtonVue, TipTapComponentVue }, 
+        components: { FormButtonVue, TipTapComponentVue },
+        setup() {
+            const router = useRouter()
+            return { router }
+        }, 
         data() {
             return {
                 article: {
@@ -28,7 +32,10 @@
             saveArticle() {
                 const url = `${baseUrl}/api/article/salve`
                 axiosAuth.post(url, this.article)
-                    .then(res => console.log(res))
+                    .then(res => {
+                        console.log(res)
+                        this.router.push('/')  
+                    }) 
                     .catch(err => console.error(err))
             }
         }

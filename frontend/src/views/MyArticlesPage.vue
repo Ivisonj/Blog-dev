@@ -12,8 +12,6 @@
     import { ptBR } from 'date-fns/locale'
     import { useStatusError } from '../stores/statusError'
     import { useMessageError } from '../stores/msgError'
-
-    import AlertComponentVue from '../components/AlertComponent.vue'
     
     interface CardDataTypes {
         id: string
@@ -26,7 +24,7 @@
 
     export default defineComponent({
         name: 'MyArticlesPage', 
-        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, MyArticleCardVue, AlertComponentVue }, 
+        components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue, MyArticleCardVue }, 
         setup() {
             const articles = ref([])
             const selectCategory = useSelectCategory()
@@ -81,7 +79,6 @@
         <HeaderTemplateVue />
         <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
-            <AlertComponentVue />
             <div class="categoryTitle">
                 <h1 class="title">
                     Meus Artigos
