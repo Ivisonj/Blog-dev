@@ -26,14 +26,31 @@ const router = createRouter({
     {
       path: '/create',
       name: 'create',
-      component: CreateArticlePage
+      component: CreateArticlePage, 
+      meta: { requiresAuth: true },
     },
     {
       path: '/my-articles',
       name: 'MyArticles',
-      component: MyArticlesPage
+      component: MyArticlesPage, 
+      meta: { requiresAuth: true },
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!localStorage.getItem('token')) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath },
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
