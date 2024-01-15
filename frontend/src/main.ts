@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import createToast from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
+import { BIconArrowClockwise, BIconArrowCounterclockwise } from 'bootstrap-icons-vue'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faItalic } from "@fortawesome/free-solid-svg-icons"
@@ -23,10 +24,15 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
 library.add(faBold, faItalic, faStrikethrough, faUndo, faRepeat, faList, faCode, faListOl, faParagraph, faWindowMinimize, faSquare, faBars, faTrash)
 
+
+
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
+
+app.component('BIconArrowClockwise', BIconArrowClockwise)
+app.component('BIconArrowCounterclockwise', BIconArrowCounterclockwise)
 
 app.component('font-awesome-icon', FontAwesomeIcon) 
 

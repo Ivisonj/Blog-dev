@@ -69,10 +69,10 @@
           <font-awesome-icon icon="fa-window-minimize" />
       </button>
       <button type="button" @click="editor.chain().focus().undo().run()" :disabled="!editor.can().chain().focus().undo().run()" class="toolbarButton">
-          <font-awesome-icon icon="undo" />
+           <BIconArrowCounterclockwise style="font-size: 1.5em;"/>
       </button>
       <button type="button" @click="editor.chain().focus().redo().run()" :disabled="!editor.can().chain().focus().redo().run()" class="toolbarButton">
-          <font-awesome-icon icon="fa-repeat" />
+          <BIconArrowClockwise style="font-size: 1.5em;"/>
       </button>
     </div>
     <div class="editorContent">
