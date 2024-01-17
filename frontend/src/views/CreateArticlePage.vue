@@ -37,7 +37,7 @@
     }
 
     .createArticlePage .content {
-        width: 100%;
+        width: 75%;
         height: auto;
         padding: 20px 50px;
     }
@@ -48,4 +48,15 @@
         margin-bottom: 30px;
     }
 
+    @media screen and (max-width: 500px) {
+         .createArticlePage .content {
+            width: 100%;
+         }
+         .createArticlePage .title {
+            font-size: 1.5rem;
+         }
+        .createArticlePage .content {
+            padding: 20px 10px;
+        }
+    }
 </style>

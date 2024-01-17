@@ -139,6 +139,14 @@
         display: flex;
         flex-wrap: wrap;
     }
+
+    @media screen and (max-width: 400px) {
+        .articlesContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 </style>
 
 

@@ -37,4 +37,5 @@ export default defineComponent({
         font-size: 1rem; 
         color: #ffffff;
     }
+
 </style> 

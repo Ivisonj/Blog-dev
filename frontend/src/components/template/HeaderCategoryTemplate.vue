@@ -89,4 +89,17 @@
         align-items: center;
         justify-content: center;
     }
+
+     @media screen and (max-width: 500px) {
+        .titleContainer {
+            display: none;
+        }
+        .title {
+            display: none;
+        }
+        .categoryHeaderContainer {
+            display: flex;
+            justify-content: center;
+        }
+    }
 </style> 

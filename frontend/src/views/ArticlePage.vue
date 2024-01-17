@@ -140,6 +140,25 @@
         margin: 30px 0px 40px 0px;
     }
 
+     @media screen and (max-width: 500px) {
+        .articlePageContent .articleInfor {
+            width: 80%;
+        }
+        .articleInfor .articleTitle {
+            font-size: 1.8rem;
+        }
+        .articlePageContent .imageContainer {
+            height: 380px;
+        }
+        .articlePageContainer .articlePageContent {
+            width: 100%;
+            padding: 0px 3px;
+        }
+        .articlePageContent .articalContent {
+            width: 80%;
+        }
+    }
+
     ul,
     ol {
         padding: 0 1rem;
