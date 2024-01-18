@@ -3,10 +3,11 @@
     import { useSelectCategory } from '../../stores/selectCategory'
     import CategoryButtonVue from '../CategoryButton.vue'
     import { useRouter } from 'vue-router'
+    import CategoryButtonDropdownVue from '../CategoryButtonDropdown.vue'
 
     export default defineComponent({
         name: 'HeaderCategoryTemplate', 
-        components: { CategoryButtonVue },
+        components: { CategoryButtonVue, CategoryButtonDropdownVue },
         setup() {
             const router = useRouter()
             const selectCategory = useSelectCategory()
@@ -44,6 +45,7 @@
 
 <template> 
     <header class="categoryHeaderContainer">
+        <CategoryButtonDropdownVue />
         <div class="titleContainer">
             <h1 class="title">Categorias</h1>
         </div>
@@ -70,7 +72,7 @@
     .categoryHeaderContainer .titleContainer {
         width: auto;
         height: 100%;
-        margin-left: 50px;
+        margin-left: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -90,16 +92,15 @@
         justify-content: center;
     }
 
-     @media screen and (max-width: 500px) {
+     @media screen and (max-width: 430px) {
         .titleContainer {
             display: none;
         }
         .title {
             display: none;
         }
-        .categoryHeaderContainer {
-            display: flex;
-            justify-content: center;
+        .categoryButtonContainer {
+            display: none;
         }
     }
 </style> 

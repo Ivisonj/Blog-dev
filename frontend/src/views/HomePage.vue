@@ -78,7 +78,7 @@
                     {{ `Artigos sobre desenvolvimento ${capitalizeFirstLetter(selectCategory.selectedCategory)}` }}
                 </h3>
                 <h3 class="subtitle" v-else>
-                    Oooops... Ainda não há artigos relacionados a este assunto! :(
+                    {{ `Oooops... Ainda não há artigos relacionados a ${capitalizeFirstLetter(selectCategory.selectedCategory)} :(` }}
                 </h3>
             </div>
             <div class="articlesContainer">

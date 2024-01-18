@@ -48,7 +48,7 @@
     .logo {
         width: auto;
         height: 100%;
-        margin-left: 50px;
+        margin-left: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -57,7 +57,7 @@
     .menuContainer {
         width: auto;
         height: 100%;
-        margin-right: 50px;
+        margin-right: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
