@@ -13,7 +13,7 @@ export default class RegisterUserController {
                     email: req.body.email,
                     password: req.body.password
                 })
-                res.status(201).send()
+                res.status(201).send('Usuário cadastrado com secesso!')
             } catch(erro: any) {
                 res.status(400).send(erro.message)
             }

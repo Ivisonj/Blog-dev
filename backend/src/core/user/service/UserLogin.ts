@@ -4,7 +4,7 @@ import UserRepository from "./UserRepository"
 import CryptoProvider from "./CryptoProvider"
 import Erros from "@/core/shared/Erros"
 
-interface LoginData {
+export interface LoginData {
     email: string
     password: string
 }
@@ -24,6 +24,8 @@ export default class UserLogin implements UseCase<LoginData, User> {
 
         if(!equalsPassword) throw new Error(Erros.INCORRECT_PASSWORD)
 
-        return { ...userExists, password: undefined }
+        // const {  password, ...userWithoutPassword } = userExists
+
+        return userExists
     }
 }

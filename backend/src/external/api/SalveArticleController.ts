@@ -18,7 +18,7 @@ export default class SalveArticleController {
                     userId: req.body.userId, 
                     content: req.body.content  
                 })
-                res.status(200).send()
+                res.status(200).send('Artigo salvo com sucesso!')
             } catch(erro: any) {
                 res.status(400).send(erro.message)
             }
