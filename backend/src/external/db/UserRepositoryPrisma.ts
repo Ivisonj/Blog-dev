@@ -42,11 +42,11 @@ export default class UserRepositoryPrisma implements UserRepository {
         }))
     }
 
-    async getUserById(id: string): Promise<User[] | null> {
+    async getUserById(id: string): Promise<User | null> {
         const user = await this.prisma.users.findUnique({
             where: { id: id }
         })
-        if(!user) throw new Error(Erros.USER_NOT_EXISTS)
+    
         return {
             id: user.id,
             name: user.name,

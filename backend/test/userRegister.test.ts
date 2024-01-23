@@ -2,6 +2,7 @@ import User from "@/core/user/model/User"
 import RegisterUser from "@/core/user/service/RegisterUser"
 import UserRepository from "@/core/user/service/UserRepository"
 import CryptoProvider from "@/core/user/service/CryptoProvider"
+import Erros from "@/core/shared/Erros"
 
 describe('Register user', () => {
     let userRepository: jest.Mocked<UserRepository>
@@ -50,6 +51,6 @@ describe('Register user', () => {
         }
         userRepository.searchByEmail.mockReturnValue(Promise.resolve(user))
 
-        await expect(registerUser.execute(user)).rejects.toThrow('Usuário já existe')
+        await expect(registerUser.execute(user)).rejects.toThrow(Erros.USER_ALREADY_EXISTS)
     })
 })

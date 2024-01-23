@@ -1,10 +1,10 @@
 import { Express } from "express"
-import DeleUser from "@/core/user/service/DeleteUser"
+import DeleteUser from "@/core/user/service/DeleteUser"
 
 export default class DeleteUserController {
     constructor(
         readonly server: Express, 
-        readonly useCase: DeleUser, 
+        readonly useCase: DeleteUser, 
         ...middlewares: any[] 
     ) {
         server.delete('/api/user/delete/:id', ...middlewares, async (req, res) => {

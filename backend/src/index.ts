@@ -19,7 +19,7 @@ import GetArticles from './core/article/service/GetArticles'
 import GetArticlesController from './external/api/GetArticlesController'
 import GetUserById from './core/user/service/GetUserById'
 import GetUserByIdController from './external/api/GetUserByIdController'
-import DeleUser from './core/user/service/DeleteUser'
+import DeleteUser from './core/user/service/DeleteUser'
 import DeleteUserController from './external/api/DeleteUserController'
 import GetArticleById from './core/article/service/GetArticleById'
 import GetArticleByIdController from './external/api/GetArticleByIdController'
@@ -75,7 +75,7 @@ const getUserById = new GetUserById(userRepository)
 new GetUserByIdController(app, getUserById, userMid)
 
 //---Delete user
-const deleteUser = new DeleUser(userRepository)
+const deleteUser = new DeleteUser(userRepository)
 new DeleteUserController(app, deleteUser, userMid)
 
 //---salve article
