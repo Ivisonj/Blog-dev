@@ -1,6 +1,7 @@
 import UseCase from "@/core/shared/UseCase"
 import Article from "../model/Article"
 import ArticleRepository from "./ArticleRepository"
+import Erros from "@/core/shared/Erros"
 
 interface In {
     articleId: string
@@ -9,7 +10,11 @@ interface In {
 export default class GetArticleById implements UseCase<In, Article> {
     constructor(private repository: ArticleRepository) {}
 
-    execute(In: In): Promise<Article> {
-        return this.repository.getArticleById(In.articleId)
+    async execute(In: In): Promise<Article> {
+        const article = await this.repository.getArticleById(In.articleId) 
+        
+        if(!article) throw new Error(Erros.ARTICLE_NOT_EXISTS)
+        
+        return article
     }
 }
