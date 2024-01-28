@@ -24,8 +24,8 @@ export default class UserLogin implements UseCase<LoginData, User> {
 
         if(!equalsPassword) throw new Error(Erros.INCORRECT_PASSWORD)
 
-        // const {  password, ...userWithoutPassword } = userExists
-
         return userExists
     }
 }
+
+        // const {  password, ...userWithoutPassword } = userExists

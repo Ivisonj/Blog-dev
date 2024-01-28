@@ -13,8 +13,8 @@ export default class GetArticlesByUserIdController {
                     userId: (req.params as any).id 
                 })
                 res.status(200).send(articles)
-            }catch(error) {
-                res.status(400).send(error)
+            }catch(error: any) {
+                res.status(400).send(error.message)
             }
         })
     }
