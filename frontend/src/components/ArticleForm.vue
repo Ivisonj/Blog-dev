@@ -3,7 +3,7 @@
     import { useRouter } from 'vue-router'
     import FormButtonVue from './FormButton.vue'
     import TipTapComponentVue from './TipTapComponent.vue'
-    import { baseUrl } from '../global'
+    import { baseUrl, showError, showSuccess } from '../global'
     import { axiosAuth } from '../config/axiosConfig' 
 
     interface ArticleTypes {
@@ -14,7 +14,14 @@
         imageUrl: string
         category: string
         content: string 
+        autorName: string
         userId: string
+    }
+
+    interface UserTypes {
+        id: string
+        name: string
+        email: string
     }
 
     export default defineComponent({
@@ -32,8 +39,9 @@
                     imageUrl: '', 
                     category: '', 
                     content: '', 
+                    autorName: '',
                     userId: window.localStorage.getItem('userId'), 
-                } as ArticleTypes
+                } as ArticleTypes, 
             }
         }, 
         methods: {
@@ -42,13 +50,26 @@
             },
             saveArticle() {
                 const url = `${baseUrl}/api/article/salve`
-                axiosAuth.post<ArticleTypes>(url, this.article)
+                axiosAuth.post(url, this.article)
                     .then(res => {
-                        console.log(res)
-                        this.router.push('/')  
+                        this.router.push('/')
+                        showSuccess(res.data)
+                        console.log(res.data)
                     }) 
-                    .catch(err => console.error(err))
+                    .catch(showError)
+            },
+            loadUser() {
+                const userId = window.localStorage.getItem('userId')
+                const url = `${baseUrl}/api/user/${userId}`
+                axiosAuth.get(url)
+                    .then(res => {
+                        this.article.autorName = res.data.name
+                    })
+                    .catch(showError)
             }
+        }, 
+        mounted() {
+            this.loadUser()
         }
     })
 </script>

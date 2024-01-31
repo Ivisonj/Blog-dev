@@ -17,8 +17,9 @@
         createdAt: string
         imageUrl: string
         category: string
-        content: string 
+        autorName: string
         userId: string
+        content: string 
     }
 
     export default defineComponent({
@@ -49,8 +50,14 @@
                 return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
+            const formatedName = (name: string) => {
+                let parts = name.split(' ')
+                return parts[0] + ' ' + parts[1]
+            } 
+
             return {
-                capitalizeFirstLetter, 
+                capitalizeFirstLetter,
+                formatedName 
             }
         }
     })
@@ -68,7 +75,7 @@
                         <h1 class="articleTitle">{{ article.title }}</h1>
                         <div class="articleAutorContainer">
                             <h3 class="createdAt">{{ article.createdAt }}</h3>
-                            <p>{{ `Publicado por Ivison Joel` }}</p>
+                            <p class="autorName">{{ `Publicado por ${formatedName(article.autorName)}` }}</p>
                         </div>
                     </div>
                     <div class="imageContainer">
@@ -115,7 +122,7 @@
     .articlePageContent .articleInfor {
         width: 80%;
         height: auto;
-        margin: 50px 0px 0px 0px;
+        margin: 20px 0px 0px 0px;
         display: flex;
         flex-direction: column;
     }
@@ -137,6 +144,12 @@
         justify-content: space-between;
     }
 
+    .autorName {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
     .articleInfor .createdAt {
         font-size: 1rem;
         font-weight: 400;
@@ -144,8 +157,8 @@
 
     .articlePageContent .imageContainer {
         width: 100%;
-        height: 450px;
-        padding: 50px 0px;
+        height: 400px;
+        padding: 30px 0px;
     }
 
     .imageContainer .articleImage {
@@ -167,7 +180,7 @@
             font-size: 1.8rem;
         }
         .articlePageContent .imageContainer {
-            height: 380px;
+            height: 300px;
         }
         .articlePageContainer .articlePageContent {
             width: 100%;
