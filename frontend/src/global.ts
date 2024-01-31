@@ -11,4 +11,8 @@ export function showError(e) {
     toast.error(msg)
 }
 
-export default { showError }
+export function showSuccess(msg: string) {
+    toast.success(msg)
+}
+
+export default { showError, showSuccess }

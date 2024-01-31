@@ -3,8 +3,7 @@
   import { useSelectForm } from '../stores/selectForm'
   import { defineComponent } from "vue"
   import axios from 'axios'
-  import { baseUrl } from '../global'
-  import { showError } from '../global'
+  import { baseUrl, showSuccess, showError } from '../global'
   import { useRouter } from 'vue-router'
   
   export default defineComponent({
@@ -26,8 +25,12 @@
     methods: {
       registerUser() {
         const url = `${baseUrl}/api/user/register`
+        const selectForm = useSelectForm()
         axios.post(url, this.user)
-          .then(res => console.log(res))
+          .then(res => {
+            showSuccess(res.data)
+            selectForm.setCurrentForm('2')
+          })
           .catch(showError)
       },  
       loginUser() {
