@@ -10,14 +10,15 @@
     import { format, parseISO } from 'date-fns'
     import { ptBR } from 'date-fns/locale'
 
-    interface CardDataTypes {
+    interface ArticleTypes {
         id: string
         title: string
         description: string
         createdAt: string
         imageUrl: string
-        category?: string
-        content?: string 
+        category: string
+        content: string 
+        userId: string
     }
 
     export default defineComponent({
@@ -25,7 +26,7 @@
         components: { HeaderTemplateVue, HeaderCategoryTemplateVue, ContentTemplateVue, FooterTemplateVue },
         data() {
             return {
-                article: []
+                article: {} as ArticleTypes
             }
         },
         methods: {
@@ -60,16 +61,21 @@
         <HeaderTemplateVue />
         <HeaderCategoryTemplateVue />
         <ContentTemplateVue>
-            <div class="articlePageContent">
-                <div class="articleInfor">
-                    <h3 class="articleCategory">{{ article.category ? `Categoria: ${capitalizeFirstLetter(article.category)}` : '' }}</h3>
-                    <h1 class="articleTitle">{{ article.title }}</h1>
-                    <h3 class="createdAt">{{ article.createdAt }}</h3>
+            <div class="articlePage">
+                <div class="articlePageContent">
+                    <div class="articleInfor">
+                        <h3 class="articleCategory">{{ article.category ? `Categoria: ${capitalizeFirstLetter(article.category)}` : '' }}</h3>
+                        <h1 class="articleTitle">{{ article.title }}</h1>
+                        <div class="articleAutorContainer">
+                            <h3 class="createdAt">{{ article.createdAt }}</h3>
+                            <p>{{ `Publicado por Ivison Joel` }}</p>
+                        </div>
+                    </div>
+                    <div class="imageContainer">
+                        <img class="articleImage" :src="article.imageUrl" alt="img">
+                    </div>
+                    <div class="articalContent" v-html="article.content"/>
                 </div>
-                <div class="imageContainer">
-                    <img class="articleImage" :src="article.imageUrl" alt="img">
-                </div>
-                <div class="articalContent" v-html="article.content"/>
             </div>
         </ContentTemplateVue>
         <FooterTemplateVue />
@@ -90,6 +96,13 @@
         ;
     }
 
+    .articlePageContainer .articlePage {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+
     .articlePageContainer .articlePageContent {
         width: 85%;
         height: auto;
@@ -100,9 +113,9 @@
     }
 
     .articlePageContent .articleInfor {
-        width: 75%;
+        width: 80%;
         height: auto;
-        margin: 50px 0px 30px 0px;
+        margin: 50px 0px 0px 0px;
         display: flex;
         flex-direction: column;
     }
@@ -116,6 +129,12 @@
         font-size: 2.5rem;
         font-weight: bold;
         margin-bottom: 20px;
+    }
+
+    .articleAutorContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
     }
 
     .articleInfor .createdAt {
@@ -135,14 +154,14 @@
     }
 
     .articlePageContent .articalContent {
-        width: 75%;
+        width: 80%;
         height: 300px;
-        margin: 30px 0px 40px 0px;
+        margin: 0px 0px 40px 0px;
     }
 
      @media screen and (max-width: 500px) {
         .articlePageContent .articleInfor {
-            width: 80%;
+            width: 95%;
         }
         .articleInfor .articleTitle {
             font-size: 1.8rem;
@@ -155,7 +174,7 @@
             padding: 0px 3px;
         }
         .articlePageContent .articalContent {
-            width: 80%;
+            width: 95%;
         }
     }
 

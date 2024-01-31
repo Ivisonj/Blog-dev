@@ -6,6 +6,17 @@
     import { baseUrl } from '../global'
     import { axiosAuth } from '../config/axiosConfig' 
 
+    interface ArticleTypes {
+        id: string
+        title: string
+        description: string
+        createdAt: string
+        imageUrl: string
+        category: string
+        content: string 
+        userId: string
+    }
+
     export default defineComponent({
         name: 'ArticleForm', 
         components: { FormButtonVue, TipTapComponentVue },
@@ -22,7 +33,7 @@
                     category: '', 
                     content: '', 
                     userId: window.localStorage.getItem('userId'), 
-                }
+                } as ArticleTypes
             }
         }, 
         methods: {
@@ -31,7 +42,7 @@
             },
             saveArticle() {
                 const url = `${baseUrl}/api/article/salve`
-                axiosAuth.post(url, this.article)
+                axiosAuth.post<ArticleTypes>(url, this.article)
                     .then(res => {
                         console.log(res)
                         this.router.push('/')  
