@@ -36,7 +36,8 @@ describe("delete article controller", () => {
                 title: 'Artigo Teste',
                 description: 'Este artigo aborda...',
                 imageUrl: '/link',
-                category: 'web', 
+                category: 'web',
+                author: 'ivison', 
                 userId: '123456',
                 content: 'Artigo sobre testes automatizados'
         }

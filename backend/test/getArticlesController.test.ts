@@ -37,6 +37,7 @@ describe("get articles controller", () => {
                 description: 'Este artigo aborda...',
                 imageUrl: '/link',
                 category: 'web', 
+                author: 'ivison',
                 userId: '123',
                 content: 'Artigo sobre testes automatizados'
             }

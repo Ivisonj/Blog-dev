@@ -23,6 +23,7 @@ describe("save article", () => {
             description: 'Este artigo aborda...',
             imageUrl: '/link',
             category: 'web', 
+            author: 'ivison',
             userId: '123',
             content: 'Artigo sobre testes automatizados'
         }

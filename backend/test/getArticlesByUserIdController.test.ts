@@ -38,6 +38,7 @@ describe("get article by user id", () => {
                 description: 'Este artigo aborda...',
                 imageUrl: '/link',
                 category: 'web', 
+                author: 'ivison',
                 userId: userId,
                 content: 'Artigo sobre testes automatizados'
             }
