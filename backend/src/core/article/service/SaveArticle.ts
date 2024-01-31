@@ -16,6 +16,7 @@ export default class SaveArticle implements UseCase<Article, void> {
             description: DescriptionFormar.validateDescription(article.description, 5, 100), 
             imageUrl: article.imageUrl,
             category: article.category,
+            author: article.author,
             userId: article.userId, 
             content: ContentFormat.validateContent(article.content, 10, 4000)
         }

@@ -1,6 +1,5 @@
 import Article from "@/core/article/model/Article"
 import ArticleRepository from "@/core/article/service/ArticleRepository"
-import Erros from "@/core/shared/Erros"
 import { PrismaClient } from "@prisma/client"
 
 export default class ArticleRepositoryPrisma implements ArticleRepository {
@@ -18,6 +17,7 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
             imageUrl: article.imageUrl,
             category: article.category,  
             createdAt: new Date(), 
+            author: article.author,
             userId: article.userId, 
             content: article.content
         }
@@ -29,21 +29,22 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         })
     }
 
-    async getAll(): Promise<Article[]> {
+    async getAll(): Promise<Article[] | null> {
         const articles = await this.prisma.articles.findMany()
         return articles.map((article) => ({
             id: article.id,
             title: article.title, 
             description: article.description,
             imageUrl: article.imageUrl,
-            category: article.category,  
+            category: article.category as 'web' | 'mobile' | 'desktop' | 'ai',  
             createdAt: article.createdAt, 
+            author: article.author,
             userId: article.userId, 
             content: article.content
         }))
     }
 
-    async getArticleById(id: string): Promise<Article[] | null> {
+    async getArticleById(id: string): Promise<Article | null> {
         const article = await this.prisma.articles.findUnique({
             where: { id: id }
         })
@@ -53,8 +54,9 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
             title: article.title, 
             description: article.description,
             imageUrl: article.imageUrl,
-            category: article.category,  
-            createdAt: article.createdAt, 
+            category: article.category as 'web' | 'mobile' | 'desktop' | 'ai',    
+            createdAt: article.createdAt,
+            author: article.author, 
             userId: article.userId, 
             content: article.content 
         }
@@ -69,8 +71,9 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
             title: article.title, 
             description: article.description,
             imageUrl: article.imageUrl,
-            category: article.category,  
-            createdAt: article.createdAt, 
+            category: article.category as 'web' | 'mobile' | 'desktop' | 'ai',  
+            createdAt: article.createdAt,
+            author: article.author, 
             userId: article.userId, 
             content: article.content
         }))

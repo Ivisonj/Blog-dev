@@ -15,6 +15,7 @@ export default class SalveArticleController {
                     description: req.body.description,
                     imageUrl: req.body.imageUrl,
                     category: req.body.category,
+                    author: req.body.author,
                     userId: req.body.userId, 
                     content: req.body.content  
                 })
