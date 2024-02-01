@@ -77,7 +77,7 @@
                         <h3 class="articleCategory">{{ article.category ? `Categoria: ${capitalizeFirstLetter(article.category)}` : '' }}</h3>
                         <h1 class="articleTitle">{{ article.title }}</h1>
                         <div class="articleAutorContainer">
-                            <h3 class="createdAt">{{ article.createdAt }}</h3>
+                            <p class="createdAt">{{ article.createdAt }}</p>
                             <p class="author">{{ `Publicado por ${formatedName(article.author)}` }}</p>
                         </div>
                     </div>
@@ -140,25 +140,27 @@
         font-family: sans-serif;
         font-size: 2.5rem;
         font-weight: bold;
-        margin-bottom: 20px;
     }
 
     .articleAutorContainer {
         width: 100%;
         display: flex;
         justify-content: space-between;
+        margin-bottom: 20px;
     }
 
     .author {
         width: 50%;
         display: flex;
         justify-content: flex-end;
+        margin: 0;
     }
 
     .articleInfor .createdAt {
         font-family: sans-serif;
         font-size: 1rem;
         font-weight: 400;
+        margin: 0;
     }
 
     .articlePageContent .imageContainer {

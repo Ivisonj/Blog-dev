@@ -17,16 +17,19 @@ axiosAuth.interceptors.request.use(request => {
   }, error => {
     return Promise.reject(error)
 })
-  
-//   // Seu código existente
-//   const success = res => res
-//   const error = err => {
-//     if(403 === err.response.status) {
-//       window.location = '/'
-//     } else {
-//       return Promise.reject(err)
-//     }
-//   }
-  
-//   axios.interceptors.response.use(success, error)
+
+axiosAuth.interceptors.response.use(
+  (response) => response, 
+  async (error) => {
+    const prevRequest = error?.config
+    if (error?.response?.status === 403 && !prevRequest?.sent) {
+      prevRequest.sent = true
+      window.localStorage.removeItem('userId')
+      window.localStorage.removeItem('token')
+      window.location.href = '/'
+      return axiosAuth(prevRequest)
+    }
+    return Promise.reject(error)    
+  }
+)
   
