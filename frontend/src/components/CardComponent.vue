@@ -112,4 +112,10 @@
         font-size: 0.9rem;
         font-weight: 100;
     }
+
+    @media screen and (max-width: 400px) {
+        .articleContainer {
+            margin-top: 24px;
+        }
+    }
 </style> 

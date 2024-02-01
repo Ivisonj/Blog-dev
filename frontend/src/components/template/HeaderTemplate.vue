@@ -48,7 +48,7 @@
     .logo {
         width: auto;
         height: 100%;
-        margin-left: 20px;
+        margin-left: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -57,9 +57,18 @@
     .menuContainer {
         width: auto;
         height: 100%;
-        margin-right: 20px;
+        margin-right: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    @media screen and (max-width: 400px) {
+        .logo {
+             margin-left: 20px;
+        }
+        .menuContainer {
+            margin-right: 20px;
+        }
     }
 </style>

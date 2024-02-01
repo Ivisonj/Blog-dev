@@ -15,12 +15,14 @@ export default defineComponent({
 </template>
 <style scoped>
     .logoTitle {
+        font-family: sans-serif;
         font-size: 2rem;
         font-weight: 400;
         color: #fff;
     }
 
     .logoTitle2 {
+        font-family: sans-serif;
         font-size: 1rem;
         font-weight: 400;
         color: #9c81b6;

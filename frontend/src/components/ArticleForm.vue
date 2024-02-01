@@ -14,14 +14,8 @@
         imageUrl: string
         category: string
         content: string 
-        autorName: string
+        author: string
         userId: string
-    }
-
-    interface UserTypes {
-        id: string
-        name: string
-        email: string
     }
 
     export default defineComponent({
@@ -39,7 +33,7 @@
                     imageUrl: '', 
                     category: '', 
                     content: '', 
-                    autorName: '',
+                    author: '',
                     userId: window.localStorage.getItem('userId'), 
                 } as ArticleTypes, 
             }
@@ -54,7 +48,6 @@
                     .then(res => {
                         this.router.push('/')
                         showSuccess(res.data)
-                        console.log(res.data)
                     }) 
                     .catch(showError)
             },
@@ -63,7 +56,7 @@
                 const url = `${baseUrl}/api/user/${userId}`
                 axiosAuth.get(url)
                     .then(res => {
-                        this.article.autorName = res.data.name
+                        this.article.author = res.data.name
                     })
                     .catch(showError)
             }

@@ -122,11 +122,13 @@
     }
 
     .categoryTitle .title {
+        font-family: sans-serif;
         font-size: 2.5rem;
         font-weight: bold;
     }
 
     .categoryTitle .subtitle {
+        font-family: sans-serif;
         font: 1rem;
         font-weight: 100;
         margin-top: 10px;

@@ -23,8 +23,9 @@ import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 
-library.add(faBold, faItalic, faStrikethrough, faUndo, faRepeat, faList, faCode, faListOl, faParagraph, faWindowMinimize, faSquare, faBars, faTrash, faAngleDown, faAngleUp)
+library.add(faBold, faItalic, faStrikethrough, faUndo, faRepeat, faList, faCode, faListOl, faParagraph, faWindowMinimize, faSquare, faBars, faTrash, faAngleDown, faAngleUp, faArrowLeft)
 
 import App from './App.vue'
 import router from './router'

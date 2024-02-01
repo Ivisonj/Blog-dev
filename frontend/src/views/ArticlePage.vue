@@ -17,7 +17,7 @@
         createdAt: string
         imageUrl: string
         category: string
-        autorName: string
+        author: string
         userId: string
         content: string 
     }
@@ -51,10 +51,13 @@
             }
 
             const formatedName = (name: string) => {
+                if (!name) {
+                    return '';
+                }
                 let parts = name.split(' ')
                 return parts[0] + ' ' + parts[1]
-            } 
-
+            }
+            
             return {
                 capitalizeFirstLetter,
                 formatedName 
@@ -75,7 +78,7 @@
                         <h1 class="articleTitle">{{ article.title }}</h1>
                         <div class="articleAutorContainer">
                             <h3 class="createdAt">{{ article.createdAt }}</h3>
-                            <p class="autorName">{{ `Publicado por ${formatedName(article.autorName)}` }}</p>
+                            <p class="author">{{ `Publicado por ${formatedName(article.author)}` }}</p>
                         </div>
                     </div>
                     <div class="imageContainer">
@@ -128,11 +131,13 @@
     }
 
     .articleInfor .articleCategory {
+        font-family: sans-serif;
         font-size: 1rem;
         font-weight: 400;
     }
 
     .articleInfor .articleTitle {
+        font-family: sans-serif;
         font-size: 2.5rem;
         font-weight: bold;
         margin-bottom: 20px;
@@ -144,13 +149,14 @@
         justify-content: space-between;
     }
 
-    .autorName {
+    .author {
         width: 50%;
         display: flex;
         justify-content: flex-end;
     }
 
     .articleInfor .createdAt {
+        font-family: sans-serif;
         font-size: 1rem;
         font-weight: 400;
     }
