@@ -1,6 +1,6 @@
-import Article from "@/core/article/model/Article"
-import ArticleRepository from "@/core/article/service/ArticleRepository"
 import { PrismaClient } from "@prisma/client"
+import Article from "../../core/article/model/Article"
+import ArticleRepository from "../../core/article/service/ArticleRepository"
 
 export default class ArticleRepositoryPrisma implements ArticleRepository {
     private prisma: PrismaClient
@@ -29,9 +29,9 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         })
     }
 
-    async getAll(): Promise<Article[] | null> {
+    async getAll(): Promise<Article[]> {
         const articles = await this.prisma.articles.findMany()
-        return articles.map((article) => ({
+        return articles.map((article: Article) => ({
             id: article.id,
             title: article.title, 
             description: article.description,
@@ -48,7 +48,7 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         const article = await this.prisma.articles.findUnique({
             where: { id: id }
         })
-        if(!article) throw new Error('Artigo não existe')
+        if(!article) return null
         return {
             id: article.id,
             title: article.title, 
@@ -66,7 +66,7 @@ export default class ArticleRepositoryPrisma implements ArticleRepository {
         const articles = await this.prisma.articles.findMany({
             where: { userId: id }
         })
-        return articles.map((article) => ({
+        return articles.map((article: Article) => ({
             id: article.id,
             title: article.title, 
             description: article.description,

@@ -1,8 +1,8 @@
-import UseCase from "@/core/shared/UseCase"
+import UseCase from "../../shared/UseCase"
 import User from "../model/User"
 import UserRepository from "./UserRepository"
 import CryptoProvider from "./CryptoProvider"
-import Erros from "@/core/shared/Erros"
+import Erros from "../../shared/Erros"
 
 export interface LoginData {
     email: string

@@ -1,5 +1,5 @@
-import GetUserById from "@/core/user/service/GetUserById"
 import { Express } from "express"
+import GetUserById from "../../core/user/service/GetUserById"
 
 export default class GetUserByIdController {
     constructor(

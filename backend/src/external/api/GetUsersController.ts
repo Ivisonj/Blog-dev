@@ -1,5 +1,5 @@
-import GetUsers from "@/core/user/service/GetUsers";
 import { Express } from "express"
+import GetUsers from "../../core/user/service/GetUsers";
 
 export default class GetUsersController {
     constructor(

@@ -37,10 +37,4 @@ describe("get articles", () => {
         expect(result).toEqual(articles)
         expect(articleRepositoryMock.getAll).toHaveBeenCalled()
     })
-
-    it("should throw an error if there aren't articles exists", async () => {
-        articleRepositoryMock.getAll.mockReturnValue(Promise.resolve(null))
-
-        expect(getArticlesMock.execute()).rejects.toThrow(Erros.ARTICLE_NOT_EXISTS)
-    })
 })

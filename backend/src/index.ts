@@ -29,7 +29,7 @@ import GetArticlesByUserId from './core/article/service/GetArticlesByUserId'
 import GetArticlesByUserIdController from './external/api/GetArticlesByUserIdController'
 
 const app = express()
-const port = process.env.API_PORT ?? 4000
+const port = process.env.PORT ?? 3000
 
 app.use(cors())
 app.use(express.json())

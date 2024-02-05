@@ -1,5 +1,5 @@
-import UserLogin from "@/core/user/service/UserLogin"
 import { Express } from "express"
+import UserLogin from "../../core/user/service/UserLogin"
 import JwtProvider from "./JwtProvider"
 
 export default class UserLoginController {

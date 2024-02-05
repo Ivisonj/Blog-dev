@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"
-import CryptoProvider from "@/core/user/service/CryptoProvider"
+import CryptoProvider from "../../core/user/service/CryptoProvider"
 
 export default class PasswordCryto implements CryptoProvider {
     encrypt(password: string): string {

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { NextFunction } from 'express'
 import JwtProvider from './JwtProvider'
-import User from '@/core/user/model/User'
-import UserRepository from '@/core/user/service/UserRepository'
+import User from '../../core/user/model/User'
+import UserRepository from '../../core/user/service/UserRepository'
 
 export default function UserMiddleware(repository: UserRepository) {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -15,7 +15,7 @@ export default function UserMiddleware(repository: UserRepository) {
             return
         }
 
-        const jwtProvider = new JwtProvider(process.env.JWT_SECRET)
+        const jwtProvider = new JwtProvider(process.env.JWT_SECRET!)
 
         try {
             const userToken = jwtProvider.get(token) as User

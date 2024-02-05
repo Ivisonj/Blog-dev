@@ -4,7 +4,7 @@ export default interface Article {
     description: string
     imageUrl: string
     createdAt?: Date
-    category: 'web' | 'mobile' | 'desktop' | 'ai'
+    category: string
     author: string 
     userId: string
     content: string

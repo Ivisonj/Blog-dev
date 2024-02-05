@@ -1,5 +1,5 @@
 import { Express } from "express"
-import GetArticleById from "@/core/article/service/GetArticleById"
+import GetArticleById from "../../core/article/service/GetArticleById"
 
 export default class GetArticleByIdController {
     constructor(

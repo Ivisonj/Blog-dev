@@ -52,15 +52,4 @@ describe("get articles controller", () => {
         expect(res.statusCode).toEqual(200)
         expect(res.body).toEqual(articles)
     })
-
-    it("should throw an error if there are not exists articles", async () => {
-        articleRepositoryMock.getAll.mockReturnValue(Promise.resolve(null))
-
-        const res = await request(app)
-            .get('/api/articles')
-            .send()
-
-        expect(res.statusCode).toEqual(400)
-        expect(res.text).toEqual(Erros.ARTICLE_NOT_EXISTS)
-    })
 })

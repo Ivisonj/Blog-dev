@@ -1,7 +1,7 @@
-import UseCase from "@/core/shared/UseCase"
+import UseCase from "../../shared/UseCase"
 import User from "../model/User"
 import UserRepository from "./UserRepository"
-import Erros from "@/core/shared/Erros"
+import Erros from "../../shared/Erros"
 
 export interface In {
     userId: string

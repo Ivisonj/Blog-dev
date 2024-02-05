@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client"
-import User from "@/core/user/model/User"
-import UserRepository from "@/core/user/service/UserRepository"
-import Erros from "@/core/shared/Erros"
+import User from "../../core/user/model/User"
+import UserRepository from "../../core/user/service/UserRepository"
 
 export default class UserRepositoryPrisma implements UserRepository {
     private prisma: PrismaClient
@@ -35,10 +34,11 @@ export default class UserRepositoryPrisma implements UserRepository {
 
     async getAllUsers(): Promise<User[]> {
         const users = await this.prisma.users.findMany()
-        return users.map((user) => ({
+        return users.map((user: User) => ({
             id: user.id,
             name: user.name,
             email: user.email,
+            password: ''
         }))
     }
 
@@ -46,11 +46,12 @@ export default class UserRepositoryPrisma implements UserRepository {
         const user = await this.prisma.users.findUnique({
             where: { id: id }
         })
-    
+        if(!user) return null
         return {
             id: user.id,
             name: user.name,
             email: user.email,
+            password: ''
         }  
     }
 

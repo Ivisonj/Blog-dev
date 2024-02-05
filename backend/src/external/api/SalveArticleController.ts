@@ -1,6 +1,5 @@
-import Article from "@/core/article/model/Article";
-import SaveArticle from "@/core/article/service/SaveArticle";
 import { Express } from "express"
+import SaveArticle from "@/core/article/service/SaveArticle"
 
 export default class SalveArticleController {
     constructor(

@@ -1,12 +1,13 @@
-import UseCase from "@/core/shared/UseCase"
+import UseCase from "../../shared/UseCase"
 import User from "../model/User"
 import UserRepository from "./UserRepository"
 import CryptoProvider from "./CryptoProvider"
-import Erros from "@/core/shared/Erros"
-import Id from "@/core/shared/Id"
-import NameFormat from "@/core/shared/NameFormat "
-import EmailFormat from "@/core/shared/EmailFormat"
-import PasswordFormat from "@/core/shared/PasswordFormat"
+
+import Id from "../../shared/Id"
+import NameFormat from "../../shared/NameFormat "
+import EmailFormat from "../../shared/EmailFormat"
+import PasswordFormat from "../../shared/PasswordFormat"
+import Erros from "../../../core/shared/Erros"
 
 export default class RegisterUser implements UseCase<User, void> {
     constructor(

@@ -1,5 +1,5 @@
-import RegisterUser from "@/core/user/service/RegisterUser"
 import { Express } from "express"
+import RegisterUser from "../../core/user/service/RegisterUser"
 
 export default class RegisterUserController {
     constructor(

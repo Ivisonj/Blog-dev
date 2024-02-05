@@ -1,10 +1,10 @@
-import UseCase from "@/core/shared/UseCase"
+import UseCase from "../../shared/UseCase"
 import Article from "../model/Article"
 import ArticleRepository from "./ArticleRepository"
-import Id from "@/core/shared/Id"
-import TitleFormar from "@/core/shared/TitileFormat"
-import ContentFormat from "@/core/shared/ContentFormat"
-import DescriptionFormar from "@/core/shared/DescriptionFormat"
+import Id from "../../shared/Id"
+import TitleFormar from "../../shared/TitileFormat"
+import ContentFormat from "../../shared/ContentFormat"
+import DescriptionFormar from "../../shared/DescriptionFormat"
 
 export default class SaveArticle implements UseCase<Article, void> {
     constructor(private repository: ArticleRepository) {}
