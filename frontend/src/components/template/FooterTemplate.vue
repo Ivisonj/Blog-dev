@@ -11,7 +11,9 @@ export default defineComponent({
 <template> 
     <footer class="footerContainer">
         <div class="leftCol">
-            <LogoComponentVue />
+            <div class="logoConatiner">
+                <LogoComponentVue />
+            </div>
             <p class="copyright">© 2024 Blog.Dev</p>
         </div>
     </footer>
@@ -23,6 +25,11 @@ export default defineComponent({
         padding: 56px 50px;
         margin-top: 40px;
         background-color: #141434;
+    }
+
+    .logoConatiner {
+        width: 100px;
+        height: 36px;
     }
 
     .footerContainer .leftCol {

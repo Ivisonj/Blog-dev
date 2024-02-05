@@ -52,7 +52,7 @@
 
             const formatedName = (name: string) => {
                 if (!name) {
-                    return '';
+                    return ''
                 }
                 let parts = name.split(' ')
                 return parts[0] + ' ' + parts[1]
@@ -176,8 +176,7 @@
 
     .articlePageContent .articalContent {
         width: 80%;
-        height: 300px;
-        margin: 0px 0px 40px 0px;
+        min-height: 300px;
     }
 
      @media screen and (max-width: 500px) {
@@ -211,7 +210,7 @@
     }
 
     code {
-        background-color: rgba(#616161, 0.1);
+        background-color: #DCDCDC;
         color: #616161;
     }
 

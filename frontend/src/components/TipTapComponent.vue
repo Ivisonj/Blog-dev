@@ -139,7 +139,7 @@
   }
 
   code {
-    background-color: rgba(#616161, 0.1);
+    background-color: #DCDCDC;
     color: #616161;
   }
 

@@ -1,7 +1,0 @@
-Primeiro Artigo!
-
-Primeiro: Primeiro
-
-function firstArticle() {
-  console.log('Primeiro')
-}
