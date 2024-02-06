@@ -29,7 +29,7 @@ Frontend:
 
 ## Funcionalidades
 
-- Autenticação: Os usuários podem criar uma conta e fazer login para acessar o blog.
+- Autenticação: Os usuários podem criar uma conta e fazer login.
 - Gerenciamento de Artigos: Os usuários autenticados podem criar novos artigos, visualizar os artigos existentes e excluir os artigos que criaram.
 
 ## Backend
