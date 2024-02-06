@@ -6,21 +6,10 @@
     import FooterTemplateVue from '../components/template/FooterTemplate.vue'
     import { useSelectCategory } from '../stores/selectCategory'
     import MyArticleCardVue from '../components/MyArticleCard.vue'
-    import { baseUrl } from '../global'
+    import { baseUrl, showError } from '../global'
     import { axiosAuth } from '../config/axiosConfig'
     import { format, parseISO } from 'date-fns'
     import { ptBR } from 'date-fns/locale'
-    import { useStatusError } from '../stores/statusError'
-    import { useMessageError } from '../stores/msgError'
-    
-    interface CardDataTypes {
-        id: string
-        title: string
-        description: string
-        createdAt: string
-        imageUrl: string
-        category?: string
-    }
 
     export default defineComponent({
         name: 'MyArticlesPage', 
@@ -28,8 +17,6 @@
         setup() {
             const articles = ref([])
             const selectCategory = useSelectCategory()
-            const statusError = useStatusError()
-            const messageError = useMessageError()
  
             const loadArticles = () => {
                 const userId = window.localStorage.getItem('userId')
@@ -38,11 +25,7 @@
                     .then(res => {
                         articles.value = res.data
                     })
-                    .catch(err => {
-                        console.error(err)
-                        statusError.setSatus(err.response.status)
-                        messageError.setMessage(err.message)
-                    })
+                    .catch(showError)
             }
 
             const formatDate = (date: string) => {
@@ -64,8 +47,6 @@
                 selectCategory, 
                 filterByCategory, 
                 formatDate, 
-                statusError,
-                messageError
             }
         },
         mounted() {
@@ -149,4 +130,10 @@
         display: flex;
         flex-wrap: wrap;
     }
+
+    @media screen and (max-width: 1050px) {
+        .articlesContainer {
+            padding: 10px;
+        }
+    }   
 </style>

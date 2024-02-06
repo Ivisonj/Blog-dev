@@ -56,7 +56,7 @@
 </template>
 <style scoped>
     .articleContainer {
-        width: 400px;
+        width: 395px;
         height: 330px;
         display: flex;
         margin: 5px;
@@ -113,9 +113,24 @@
         font-weight: 100;
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 500px) {
         .articleContainer {
-            margin-top: 24px;
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+
+   @media screen and (min-width: 501px) and (max-width: 850px) {
+        .articleContainer {
+            width: 47.3%;
+            margin: 10px;
+        }
+    }
+
+   @media screen and (min-width: 851px) and (max-width: 1050px) {
+        .articleContainer {
+            width: 48%;
+            margin: 10px;
         }
     }
 </style> 

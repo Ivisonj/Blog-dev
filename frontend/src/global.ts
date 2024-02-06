@@ -1,5 +1,5 @@
 import { toast } from 'vue3-toastify'
-export const baseUrl = 'https://backend-blog-dev.onrender.com'
+export const baseUrl = 'http://localhost:3000'
 
 export function showError(e) {
     let msg = 'Oops.. Erro inesperado.'

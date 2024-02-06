@@ -1,7 +1,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
     import { useRouter } from 'vue-router'
-    import { baseUrl } from '../global'
+    import { baseUrl, showError } from '../global'
     import { axiosAuth } from '../config/axiosConfig'
 
     export default defineComponent({
@@ -21,12 +21,15 @@
             }
 
             const deleteCard = () => {
+                console.log(props.id)
                 const url = `${baseUrl}/api/article/delete/${props.id}`
                 axiosAuth.delete(url)
-                    .then(res => console.log(res))
-                    .catch(err => console.error(err))
-
-                window.location.reload()
+                    .then(res => {
+                        if(res.status === 200) {    
+                            window.location.reload()
+                        }
+                    })
+                    .catch(showError)
             }
 
             return {
@@ -66,7 +69,7 @@
 </template>
 <style scoped>
     .articleContainer {
-        width: 400px;
+        width: 395px;
         height: 330px;
         display: flex;
         margin: 5px;
@@ -134,4 +137,24 @@
         transform: translateY(3px)
     }
 
+     @media screen and (max-width: 500px) {
+        .articleContainer {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+
+   @media screen and (min-width: 501px) and (max-width: 850px) {
+        .articleContainer {
+            width: 47.3%;
+            margin: 10px;
+        }
+    }
+
+   @media screen and (min-width: 851px) and (max-width: 1050px) {
+        .articleContainer {
+            width: 48%;
+            margin: 10px;
+        }
+    }
 </style>

@@ -7,18 +7,7 @@
     import CardComponentVue from '../components/CardComponent.vue'
     import { useSelectCategory } from '../stores/selectCategory'
     import { axiosAuth } from '../config/axiosConfig'
-    import { baseUrl } from '../global'
-    import { useStatusError } from '../stores/statusError'
-    import { useMessageError } from '../stores/msgError'
-
-    interface CardDataTypes {
-        id: string
-        title: string
-        description: string
-        createdAt: string
-        imageUrl: string
-        category?: string
-    }
+    import { baseUrl, showError } from '../global'
 
     export default defineComponent({
         name: 'HomePage', 
@@ -28,19 +17,13 @@
             const selectCategory = useSelectCategory()
 
             const loadArticles = () => {
-                const statusError = useStatusError()
-                const messageError = useMessageError()
                 const url = `${baseUrl}/api/articles`
 
                 axiosAuth.get(url)
                     .then(res => {
                         articles.value = res.data
                     })
-                    .catch(err => {
-                        console.error(err)
-                        statusError.setSatus(err.response.status)
-                        messageError.setMessage(err.message)
-                    })
+                    .catch(showError)
             }
 
             const capitalizeFirstLetter = (string) => {
@@ -142,13 +125,11 @@
         flex-wrap: wrap;
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 1050px) {
         .articlesContainer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 10px;
         }
-    }
+    }    
 </style>
 
 
