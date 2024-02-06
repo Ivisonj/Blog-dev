@@ -1,6 +1,10 @@
-# -Blog-Dev
+# Blog-Dev
 
 <img src="/imgs/blog-dev-picture.png" alt="blog-dev" style="width: 600px; height: 500px;">
+
+## link do projeto em produção
+
+https://app-blog-dev.netlify.app/
 
 ## Descrição
 
