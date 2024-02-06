@@ -42,7 +42,7 @@ O código do frontend está localizado na pasta frontend. Aqui, você encontrar�
 
 ## Como Executar o Projeto Localmente
 
-1. Clone este repositório: git clone https://github.com/Ivisonj/-Hexagonal-Architecture.
+1. Clone o repositório do projeto.
 2. Instale as dependências do backend e do frontend: cd nome-do-repositorio, npm install.
 3. Crie um banco de dados PpstgreSQL.
 4. Entre na pasta backend substitua as informações que estão no arquivo ".env" pelas credenciais do seu banco de dados. 
