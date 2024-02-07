@@ -4,7 +4,7 @@
 
 ## link do projeto em produção
 
-https://app-blog-dev.netlify.app/
+https://blog-dev-t22g.onrender.com
 
 ## Descrição
 
